@@ -1,0 +1,77 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.myPollsView {
+  .viewContent {
+    gap: 2.5rem;
+
+    .tutorialCard {
+      width: 45%;
+      background-color: colours.$grey-20;
+      padding: 2.3rem 2rem;
+      border-radius: 0.75rem;
+      position: relative;
+      img {
+        position: absolute;
+        right: 0;
+      }
+
+      .tutorialCardContent {
+        gap: 0.88rem;
+        button {
+          width: max-content;
+        }
+      }
+      .tutorialCardTitle {
+        @include h5($semibold);
+        width: 70%;
+      }
+    }
+
+    .pollRack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 2rem;
+
+      .pollCard {
+        padding: 1.8rem 1.5rem;
+        border: 0.1px solid colours.$brown-30;
+        background-color: colours.$core-white;
+        border-radius: 0.75rem;
+        gap: 1rem;
+        cursor: pointer;
+        img {
+          width: 2rem;
+          height: 2rem;
+        }
+        .pollCardContent {
+          gap: 0.25rem;
+        }
+        .pollCardName {
+          font-size: $base-font-size;
+          font-weight: 500;
+          color: colours.$grey-90;
+        }
+        .pollCardVotes {
+          font-size: 0.875rem;
+          font-weight: 400;
+        }
+      }
+
+      .loaders {
+        height: 9rem;
+        width: auto;
+        background-color: colours.$grey-20;
+        border-radius: 0.75rem;
+      }
+
+      .start_poll_card {
+        justify-content: center;
+        background: linear-gradient(194deg, #4d42f0 13.6%, #dbd9fc 200.51%);
+        height: 10rem;
+        width: auto;
+        border-radius: 0.75rem;
+      }
+    }
+  }
+}

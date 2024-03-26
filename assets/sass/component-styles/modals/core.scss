@@ -1,0 +1,32 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.modal_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_header {
+  svg {
+    cursor: pointer;
+  }
+}
+.modal_card {
+  background-color: colours.$core-white;
+  border-radius: 1.25rem;
+  border: none;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  // padding: 2rem 2.5rem 4rem 2.5rem;
+  gap: 1.2rem;
+}
+
+.modal_title {
+  @include h5($semibold);
+}

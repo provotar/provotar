@@ -1,0 +1,84 @@
+@use "../utils/colours";
+@import "../utils/typography";
+
+.auth_header {
+  @include h2($bold);
+  color: colours.$grey-90;
+}
+
+.auth_wrapper {
+  margin: 0 auto;
+  width: 30%;
+  align-items: center;
+  position: relative;
+
+  padding-top: 8rem;
+  gap: 2rem;
+  // border: 1px solid black;
+
+  .top_section {
+    gap: 2rem;
+    align-items: center;
+    width: 65%;
+  }
+  .google_link {
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid colours.$grey-40;
+    border-radius: 0.375rem;
+    p {
+      font-size: $base-font-size;
+      font-weight: 500;
+      color: colours.$grey-70;
+    }
+  }
+  .header_wrapper {
+    gap: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    .sub_heading {
+      font-size: $base-font-size;
+      color: colours.$grey-80;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .auth_form {
+    width: 75%;
+    gap: 2.5rem;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .form_wrapper {
+    gap: 1rem;
+
+    a {
+      color: colours.$grey-60;
+      font-size: 0.875rem;
+    }
+    a:hover {
+      color: colours.$purple-50;
+      font-weight: 400;
+    }
+  }
+  .form_dets {
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .cta_links {
+    gap: 1.5rem;
+    align-items: center;
+    .cta_sub_wrapper {
+      color: colours.$grey-60;
+      gap: 0.25rem;
+    }
+  }
+}

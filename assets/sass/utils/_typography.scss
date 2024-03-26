@@ -1,0 +1,111 @@
+// line-height
+$line-height-100: 100%;
+$line-height-120: 120%;
+
+// letter spacing
+$letter-spacing-xl: -0.14rem;
+$letter-spacing-lg: -0.12rem;
+$letter-spacing-h1: -0.1rem;
+$letter-spacing-h2: -0.09rem;
+$letter-spacing-h3: -0.04rem;
+$letter-spacing-h4: -0.035rem;
+$letter-spacing-h5: -0.03rem;
+$letter-spacing-h6: -0.025rem;
+
+// font weight
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+
+$base-font-size: 1rem;
+// xl
+$xl-font-size: 3.5rem;
+$xl-line-height: $line-height-100;
+$xl-letter-spacing: $letter-spacing-xl;
+
+// lg
+$lg-font-size: 3rem;
+$lg-line-height: $line-height-100;
+$lg-letter-spacing: $letter-spacing-lg;
+
+// h1
+$h1-font-size: 2.5rem;
+$h1-line-height: $line-height-120;
+$h1-letter-spacing: $letter-spacing-h1;
+
+// h2
+$h2-font-size: 2.25rem;
+$h2-line-height: $line-height-120;
+$h2-letter-spacing: $letter-spacing-h2;
+
+// h3
+$h3-font-size: 2rem;
+$h3-line-height: $line-height-120;
+$h3-letter-spacing: $letter-spacing-h3;
+
+// h4
+$h4-font-size: 1.75rem;
+$h4-line-height: $line-height-120;
+$h4-letter-spacing: $letter-spacing-h4;
+
+// h5
+$h5-font-size: 1.5rem;
+$h5-line-height: $line-height-120;
+$h5-letter-spacing: $letter-spacing-h5;
+
+// h6
+$h6-font-size: 1.25rem;
+$h6-line-height: $line-height-120;
+$h6-letter-spacing: $letter-spacing-h6;
+
+// display
+@mixin display($font-size, $line-height, $font-weight, $letter-spacing) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+}
+
+// all display
+@mixin xl($weight) {
+  @include display($xl-font-size, $xl-line-height, $weight, $xl-letter-spacing);
+}
+@mixin lg($weight) {
+  @include display($lg-font-size, $lg-line-height, $weight, $lg-letter-spacing);
+}
+
+// heading
+@mixin heading($font-size, $line-height, $font-weight, $letter-spacing) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  letter-spacing: $letter-spacing;
+}
+
+// all headings
+@mixin h1($weight) {
+  @include heading($h1-font-size, $h1-line-height, $weight, $h1-letter-spacing);
+}
+@mixin h2($weight) {
+  @include heading($h2-font-size, $h2-line-height, $weight, $h2-letter-spacing);
+}
+@mixin h3($weight) {
+  @include heading($h3-font-size, $h3-line-height, $weight, $h3-letter-spacing);
+}
+@mixin h4($weight) {
+  @include heading($h4-font-size, $h4-line-height, $weight, $h4-letter-spacing);
+}
+@mixin h5($weight) {
+  @include heading($h5-font-size, $h5-line-height, $weight, $h5-letter-spacing);
+}
+@mixin h6($weight) {
+  @include heading($h6-font-size, $h6-line-height, $weight, $h6-letter-spacing);
+}
+
+.special-caps-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09rem;
+  text-transform: uppercase;
+}

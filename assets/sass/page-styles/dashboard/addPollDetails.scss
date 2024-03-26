@@ -1,0 +1,82 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.add-poll-details {
+  .poll-title-header {
+    gap: 1.25rem;
+    img {
+      width: 4.5rem;
+    }
+    .poll-title {
+      @include h3($semibold);
+      color: colours.$grey-90;
+    }
+  }
+
+  .position-table {
+    border-collapse: collapse;
+    th,
+    td {
+      text-align: left;
+      padding: 1.2rem;
+    }
+    th {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: colours.$grey-60;
+    }
+
+    tr:nth-child(1) {
+      border: none;
+      border-top-left-radius: 0.75rem;
+      border-bottom-left-radius: 0.75rem;
+    }
+
+    .position-item {
+      background-color: #f9fafb;
+      .position-name {
+        color: colours.$grey-90;
+        font-weight: 700;
+      }
+      .candidate-sum {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 20rem;
+        gap: 0.2rem;
+        .candidate-fname {
+          font-size: 1rem;
+          font-weight: 600;
+          color: colours.$grey-60;
+        }
+      }
+    }
+
+    .actions {
+      gap: 1.8rem;
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .create-position-btn {
+    gap: 0.5rem;
+    padding: 0.88rem 1.5rem;
+    // width: 100%;
+    border-radius: 0.5625rem;
+    border: dashed black;
+    justify-content: center;
+    border-width: 0.3px;
+    border-spacing: 4px;
+    cursor: pointer;
+    p,
+    svg {
+      color: colours.$grey-60;
+    }
+    p {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+}

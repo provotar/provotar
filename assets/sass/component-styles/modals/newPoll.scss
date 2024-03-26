@@ -1,0 +1,26 @@
+@use "../../utils/colours";
+.add_poll_name {
+  width: 35%;
+  .modal_header {
+    justify-content: flex-end;
+    padding: 0rem 2.5rem 0rem 2.5rem;
+  }
+  .new-poll-details {
+    align-items: center;
+    gap: 2.5rem;
+    padding-bottom: 2rem;
+
+    .poll-box-circle {
+      width: 10rem;
+    }
+
+    .new-poll-form {
+      align-items: center;
+      gap: 1.5rem;
+      .modal_title {
+        width: 70%;
+        text-align: center;
+      }
+    }
+  }
+}

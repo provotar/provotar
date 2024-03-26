@@ -1,0 +1,46 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.success-modal {
+  width: 30%;
+
+  .modal_header {
+    justify-content: flex-end;
+  }
+
+  .modal_header,
+  .content_wrapper {
+    padding: 0rem 2.5rem 0rem 2.5rem;
+  }
+
+  .success_mark {
+    width: 8rem;
+  }
+
+  .content_wrapper {
+    align-items: center;
+    gap: 2rem;
+    .success-content {
+      align-items: center;
+      gap: 1.5rem;
+      .success-msg {
+        align-items: center;
+        gap: 0.6rem;
+
+        .modal-title {
+          @include h5($semibold);
+          color: colours.$grey-90;
+        }
+        .modal-subtitle {
+          color: colours.$grey-60;
+          font-size: 1rem;
+          font-weight: 400;
+          line-height: 145%;
+        }
+      }
+      .modal_ctas {
+        gap: 1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+@use "../utils/colours";
+
+.sml_btn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 145%;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease-out;
+}
+
+.lg_btn {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 145%;
+  padding: 1rem 1.5rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  transition: 0.2s ease-out;
+}
+
+.back-button:hover {
+  color: colours.$grey-90;
+}
+
+.pry_purple {
+  background-color: colours.$purple-50;
+  border: none;
+  color: colours.$core-white;
+}
+
+.pry_purple:hover {
+  background-color: colours.$purple-60;
+}
+.pry_purple_loading {
+  background-color: colours.$purple-20;
+  color: colours.$core-white;
+  border: none;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  svg {
+    animation: spinner 2s linear infinite;
+  }
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.pry_purple_disabled {
+  background-color: colours.$purple-20;
+  color: colours.$core-white;
+  border: none;
+  cursor: default;
+}
+
+// primary black
+.pry_black {
+  background-color: colours.$grey-90;
+  border: none;
+  color: colours.$core-white;
+}
+.pry_black:hover {
+  background-color: colours.$core-black;
+}
+
+.pry_black_disabled {
+  background-color: colours.$grey-40;
+  border: none;
+  color: colours.$core-white;
+  cursor: not-allowed;
+}
+
+// primary white
+.pry_white {
+  background-color: colours.$core-white;
+  border: none;
+  color: colours.$purple-50;
+}
+.pry_white:hover {
+  background-color: colours.$core-white;
+}
+
+// pry grey
+.pry_grey {
+  background-color: colours.$grey-20;
+  border: none;
+  color: colours.$purple-50;
+}
+.pry_grey:hover {
+  gap: 0.6rem;
+}
+
+// pry light-grey
+.pry_light_grey {
+  background-color: colours.$grey-30;
+  border: none;
+  color: colours.$grey-70;
+}
+// .pry_light_grey:hover {
+//   background-color: colours.$purple-50;
+//   color: colours.$core-white;
+// }
+
+// sec purple
+.sec_purple {
+  outline: 1.5px solid colours.$purple-60;
+  background-color: colours.$core-white;
+  border: none;
+  color: colours.$purple-60;
+}
+.sec_purple:hover {
+  background-color: colours.$purple-10;
+  outline: 1.5px solid colours.$purple-70;
+  color: colours.$purple-70;
+}
+
+// sec grey
+.sec_grey {
+  outline: 1.5px solid colours.$grey-50;
+  background-color: colours.$core-white;
+  border: none;
+  color: colours.$grey-60;
+}
+.sec_grey:hover {
+  outline: 1.5px solid colours.$grey-50;
+}
+
+.back-button {
+  gap: 0.5rem;
+  cursor: pointer;
+  color: colours.$grey-60;
+  p {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}

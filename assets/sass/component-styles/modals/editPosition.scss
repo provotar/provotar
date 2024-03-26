@@ -1,0 +1,111 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.edit-position {
+  width: 35%;
+
+  .modal_header {
+    justify-content: space-between;
+  }
+
+  .modal_header,
+  .scroll-modal-content,
+  .modal-footer-actions {
+    padding: 0rem 2.5rem 0rem 2.5rem;
+  }
+
+  .scroll-modal-content {
+    height: 30rem;
+    gap: 2rem;
+    border-top: 0.3px solid colours.$brown-40;
+    border-bottom: 0.3px solid colours.$brown-40;
+    padding-top: 1.2rem;
+    overflow-y: scroll;
+  }
+  .candidate-list-wrapper {
+    gap: 1.25rem;
+    .candidate-list-title {
+      color: colours.$grey-60;
+    }
+    .candidate-dets-wrapper,
+    .candidate-dets {
+      gap: 1.5rem;
+    }
+
+    .candidate-list {
+      padding: 1rem 0.88rem;
+      justify-content: space-between;
+      border: 0.6px solid colours.$grey-40;
+      border-radius: 0.56rem;
+
+      .candidate_names {
+        gap: 0.25rem;
+        align-items: center;
+        .candidate-fullname {
+          font-weight: 600;
+          color: colours.$grey-90;
+        }
+        .candidate-campaign-name {
+          font-style: italic;
+          font-weight: 300;
+          color: colours.$grey-60;
+        }
+      }
+      .candidate_actions {
+        gap: 0.88rem;
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+    .candidate-form {
+      padding: 1.5rem 0.88rem;
+      border: none;
+      border-radius: 0.81rem;
+      background-color: colours.$grey-10;
+      gap: 1.75rem;
+
+      .form-inputs {
+        gap: 1rem;
+      }
+
+      .form-actions {
+        gap: 1.75rem;
+        align-items: center;
+        justify-content: flex-end;
+        .text_btn {
+          cursor: pointer;
+        }
+        .cancel_btn {
+          color: colours.$grey-60;
+        }
+        .delete_btn {
+          color: colours.$red-60;
+        }
+      }
+    }
+  }
+
+  .create-candidate-btn {
+    gap: 0.5rem;
+    padding: 0.88rem 1.5rem;
+    // width: 100%;
+    border-radius: 0.5625rem;
+    border: dashed black;
+    justify-content: center;
+    border-width: 0.3px;
+    cursor: pointer;
+    p,
+    svg {
+      color: colours.$grey-60;
+    }
+    p {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+
+  .modal-footer-actions {
+    justify-content: flex-end;
+  }
+}

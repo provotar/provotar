@@ -1,0 +1,14 @@
+@use "../utils/colours";
+
+.errortoast {
+  gap: 0.5rem;
+  padding: 0.62rem 1.5rem;
+  border: none;
+  border-radius: 3.5rem;
+  background-color: #fdf3f2;
+  color: colours.$red-40;
+  position: absolute;
+  width: max-content;
+  offset: center;
+  top: 2rem;
+}

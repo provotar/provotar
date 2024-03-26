@@ -1,0 +1,25 @@
+// utils
+@import "utils/colours";
+@import "utils/typography";
+@import "utils/layout";
+
+// components
+@import "component-styles/buttons.scss";
+@import "component-styles/inputs.scss";
+@import "component-styles/nav.scss";
+@import "component-styles/toasts.scss";
+@import "component-styles/modals/core.scss";
+@import "component-styles/modals/confirmationModal.scss";
+@import "component-styles/modals/successModals.scss";
+@import "component-styles/modals/newPoll.scss";
+@import "component-styles/modals/editPosition.scss";
+
+// pages
+@import "page-styles/login.scss";
+@import "page-styles/dashboard/main.scss";
+@import "page-styles/dashboard/myPollsView.scss";
+@import "page-styles/dashboard/pollDetailsView.scss";
+@import "page-styles/dashboard/addPollDetails.scss";
+
+// resets
+@import "resets/reset.scss";

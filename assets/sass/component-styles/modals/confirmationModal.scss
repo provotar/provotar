@@ -1,0 +1,30 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.confirm-modal {
+  width: 30%;
+
+  .modal_header {
+    justify-content: space-between;
+  }
+
+  .modal_header,
+  .content_wrapper {
+    padding: 0rem 2rem 0rem 2rem;
+  }
+  .content_wrapper {
+    gap: 3rem;
+
+    .confirm_msg {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 145%;
+      color: colours.$grey-60;
+    }
+  }
+
+  .modal_ctas {
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+}

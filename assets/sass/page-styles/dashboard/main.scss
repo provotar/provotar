@@ -1,0 +1,21 @@
+.main_dashboard {
+  align-items: flex-start;
+  gap: 4rem;
+  overflow: hidden;
+}
+.dashView {
+  margin-top: 2.4rem;
+  width: 70%;
+  gap: 2.62rem;
+  height: 100vh;
+  overflow-y: scroll;
+  margin-left: 22%;
+
+  .topView {
+    justify-content: space-between;
+    align-items: center;
+    .viewHeader {
+      @include h5($semibold);
+    }
+  }
+}

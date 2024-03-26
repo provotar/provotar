@@ -1,0 +1,124 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.poll-details-view {
+  margin-bottom: 4rem;
+  .poll-details-wrapper {
+    gap: 4rem;
+  }
+
+  .top-section {
+    gap: 2rem;
+    .poll-header {
+      gap: 1.1rem;
+
+      .big-flag {
+        width: 6.25rem;
+      }
+      .poll-header-content {
+        gap: 1rem;
+        .poll-title-cta {
+          justify-content: space-between;
+
+          .poll-title {
+            @include h3($semibold);
+            color: colours.$grey-90;
+          }
+          .poll-ctas {
+            gap: 2rem;
+          }
+        }
+        .copylink {
+          width: max-content;
+        }
+      }
+    }
+  }
+
+  .poll-stat-card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 4rem;
+
+    .poll-stat-card {
+      gap: 1.25rem;
+      padding: 1.5rem;
+      border: 0.4px solid colours.$brown-30;
+      border-radius: 0.6rem;
+
+      .poll-stat-dets {
+        gap: 0.25rem;
+
+        .poll-stat-title {
+          font-size: 0.875rem;
+          color: colours.$grey-60;
+        }
+        .poll-stat-value {
+          @include h4($semibold);
+          color: colours.$grey-90;
+        }
+      }
+    }
+  }
+
+  .poll-data-wrapper {
+    gap: 1.5rem;
+
+    .poll-data-title {
+      @include h6($medium);
+      color: colours.$grey-90;
+    }
+
+    .poll-data-main {
+      gap: 2.5rem;
+      background-color: colours.$grey-20;
+      padding: 2rem;
+      border: none;
+      border-radius: 1.5rem;
+
+      .poll-data-header {
+        justify-content: space-between;
+        .position-name {
+          @include h6($bold);
+          color: colours.$grey-90;
+        }
+        .see-polls-dropdown {
+          gap: 0.5rem;
+          color: colours.$grey-60;
+          cursor: pointer;
+          p {
+            font-size: 0.875rem;
+            font-weight: 600;
+          }
+        }
+        .see-polls-dropdown:hover {
+          color: colours.$purple-50;
+        }
+      }
+
+      .candidate-data {
+        justify-content: space-between;
+        padding: 0.75rem 0rem;
+        border-top: 0.4px solid colours.$brown-20;
+        .candidate-name {
+          font-size: 1.125rem;
+          color: colours.$grey-70;
+          font-weight: 600;
+        }
+        .vote-percentage {
+          justify-content: space-between;
+          width: 11%;
+
+          .vote-flag {
+            gap: 0.2rem;
+            color: colours.$grey-70;
+          }
+          .percentage-value {
+            @include h5($semibold);
+            color: colours.$grey-70;
+          }
+        }
+      }
+    }
+  }
+}
