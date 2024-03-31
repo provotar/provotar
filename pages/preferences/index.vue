@@ -1,3 +1,8 @@
+<script setup>
+definePageMeta({
+    layout: "dashboard"
+})
+</script>
 <template>
     <div class="dashView prefView flex-col">
         <div class="topView flex-row">

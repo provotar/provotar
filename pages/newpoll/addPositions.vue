@@ -1,11 +1,16 @@
 <script setup>
 import { usePollStore } from '~/store/polls';
 import { v4 as uuidv4 } from "uuid";
+const route = useRouter();
+
+definePageMeta({
+    layout: "dashboard"
+})
+
 const usePolls = usePollStore();
 const positionList = ref([]);
 const positionToEdit = ref([]);
 
-const emit = defineEmits(['goToHome'])
 
 // Modal state object
 const editPositionModal = ref({ isOpen: false });
@@ -61,7 +66,21 @@ const addPositionsToDB = () => {
 // close success, go to home view
 const closePollSuccess = () => {
     closeModal(successPollCreatedModal.value);
-    emit('goToHome');
+    route.push('/mypolls')
+}
+
+// copy-link\
+const linkCopied = ref(false)
+const copyLink = async () => {
+    try {
+        linkCopied.value = true
+        await navigator.clipboard.writeText(`${window.origin}/vote/${usePolls.newPoll.pollID}`);
+        setTimeout(() => {
+            linkCopied.value = false
+        }, 2000);
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 
@@ -69,10 +88,10 @@ const closePollSuccess = () => {
 
 <template>
     <div class="dashView add-poll-details flex-col">
-        <div class="back-button flex-row" @click="$emit('goToHome')">
+        <NuxtLink to="/mypolls" class="back-button flex-row">
             <PhosphorIconCaretLeft :size="16" weight="bold" />
             <p>Back</p>
-        </div>
+        </NuxtLink>
         <div class="poll-title-header flex-col">
             <img src="/images/icons/big_flag.svg" alt="big_flag">
             <div class="topView flex-row">
@@ -107,7 +126,7 @@ const closePollSuccess = () => {
                     <td>
                         <div class="candidate-sum flex-row" v-if="position.candidates.length">
                             <p class="candidate-fname" v-for="candidate in position.candidates" :key="candidate.id">{{
-            candidate.fullName }},
+                candidate.fullName }},
                             </p>
                         </div>
                         <div v-else>
@@ -145,6 +164,7 @@ const closePollSuccess = () => {
         @closeModal="closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()">
 
     </ModalsConfirmPollCreation>
-    <ModalsSuccessPollCreated v-show="successPollCreatedModal.isOpen" @closePollSuccess="closePollSuccess">
+    <ModalsSuccessPollCreated v-show="successPollCreatedModal.isOpen" @closePollSuccess="closePollSuccess"
+        :linkCopied="linkCopied" @copyLink="copyLink()">
     </ModalsSuccessPollCreated>
 </template>

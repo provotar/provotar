@@ -64,7 +64,7 @@ export const useUserStore = defineStore("user", {
             full_name: fullName,
             userId: newUser.user.id,
           });
-          route.push("/");
+          route.push("/mypolls");
           this.loading = false;
         } else {
           console.log(error);
@@ -90,7 +90,7 @@ export const useUserStore = defineStore("user", {
 
         if (data.user) {
           this.authError = false;
-          route.push("/");
+          route.push("/mypolls");
           this.loading = false;
         } else {
           this.authError = true;

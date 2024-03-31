@@ -23,6 +23,8 @@ const toggleEditMode = (id) => {
 const deleteCandidate = (id) => {
     props.positionDetails.candidates = props.positionDetails.candidates.filter(candidate => candidate.candidate_id !== id)
 }
+
+
 </script>
 
 <template>

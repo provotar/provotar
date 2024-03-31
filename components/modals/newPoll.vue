@@ -1,16 +1,19 @@
 <script setup>
 import { usePollStore } from '~/store/polls';
+import { v4 as uuidv4 } from "uuid";
 const usePolls = usePollStore();
 
 // defineProps({
 //     isOpen: Boolean,
 // })
- defineEmits(['continue', 'closeModal'])
+defineEmits(['continue', 'closeModal'])
 
 // save new poll name
-const newPollName = ref('');
-const savePollName =()=>{
-usePolls.savePollName(newPollName.value)
+const newPollName = ref('')
+const newPollID = uuidv4();
+
+const savePollName = () => {
+    usePolls.savePollName_ID(newPollName.value, newPollID)
 };
 
 const isInputFilled = computed(() => {
@@ -36,7 +39,8 @@ const isInputFilled = computed(() => {
                         </template>
                     </Inputs>
 
-                    <Buttons v-if="isInputFilled" btn_class="sml_btn pry_purple" @btn_click="savePollName" @click="$emit('continue')">
+                    <Buttons v-if="isInputFilled" btn_class="sml_btn pry_purple" @btn_click="savePollName"
+                        @click="$emit('continue')">
                         Continue
                     </Buttons>
                     <Buttons v-else btn_class="sml_btn pry_purple_disabled"> Continue

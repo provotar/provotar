@@ -11,6 +11,7 @@ export const usePollStore = defineStore("polls", {
     accountID: null,
     newPoll: {
       pollTitle: "",
+      pollID: "",
 
       positions: [],
       // positionName: "",
@@ -52,11 +53,14 @@ export const usePollStore = defineStore("polls", {
       }
     },
 
-    // save pollname
-    savePollName(newPollName) {
-      this.newPoll.pollTitle = newPollName;
+    // // filter one poll
+    // getPollDetails(pollid) {
 
-      console.log(this.newPoll.pollTitle);
+    // },
+    // save pollname
+    savePollName_ID(newPollName, newPollID) {
+      this.newPoll.pollTitle = newPollName;
+      this.newPoll.pollID = newPollID;
     },
 
     async userDetails() {
@@ -66,29 +70,18 @@ export const usePollStore = defineStore("polls", {
         .from("userList")
         .select("*")
         .eq("userId", user.value.id);
-      console.log(userDets[0].accountId);
       this.accountID = userDets[0].accountId;
     },
-    // save candidates
-    // saveCandidates(candidateName, candidateCampaignName) {
-    //   this.newPoll.pollCandidates.push({
-    //     candidate_name: candidateName,
-    //     candidate_campaign_name: candidateCampaignName,
-    //     position_id: this.newPoll.positionId,
-    //   });
-    // },
-    // add a poll
+
     async createPoll() {
       const supabase = useSupabaseClient();
       const user = useSupabaseUser();
       const route = useRouter();
 
       if (user.value) {
-        const pollUUID = uuidv4();
-
         try {
           const { pollserror } = await supabase.from("polls").insert({
-            id: pollUUID,
+            id: this.newPoll.pollID,
             poll_name: this.newPoll.pollTitle,
             user_id: `${this.accountID}`,
           });
@@ -97,7 +90,7 @@ export const usePollStore = defineStore("polls", {
             this.newPoll.positions.map((pos) => ({
               id: pos.pos_id,
               position_name: pos.positionName,
-              poll_id: pollUUID,
+              poll_id: this.newPoll.pollID,
             }))
           );
 
@@ -118,6 +111,24 @@ export const usePollStore = defineStore("polls", {
           console.log(error);
         }
       } else {
+      }
+    },
+
+    // end poll
+    async endPoll(pollid) {
+      const supabase = useSupabaseClient();
+      const route = useRouter();
+      try {
+        const { error } = await supabase
+          .from("polls")
+          .update({ isLive: FALSE })
+          .eq("id", pollid);
+        route.push("/mypolls");
+        if (error) {
+          throw error;
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
   },

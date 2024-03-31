@@ -32,9 +32,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 2rem;
+      row-gap: 2rem;
 
       .pollCard {
-        padding: 1.8rem 1.5rem;
+        padding: 1.3rem 1.5rem;
         border: 0.1px solid colours.$brown-30;
         background-color: colours.$core-white;
         border-radius: 0.75rem;
@@ -48,13 +49,45 @@
           gap: 0.25rem;
         }
         .pollCardName {
-          font-size: $base-font-size;
-          font-weight: 500;
+          font-size: 1.12rem;
+          font-weight: 600;
           color: colours.$grey-90;
         }
         .pollCardVotes {
           font-size: 0.875rem;
           font-weight: 400;
+          color: colours.$brown-70;
+        }
+        .pollcard-subinfo {
+          gap: 0.5rem;
+          align-items: center;
+
+          .divider_dot {
+            width: 0.3rem;
+          }
+
+          .live-check {
+            gap: 0.3rem;
+            color: colours.$green-40;
+            align-items: center;
+            .live-text {
+              font-size: 0.875rem;
+            }
+            .live-dot {
+              width: 0.8rem;
+              margin-top: 0.15rem;
+            }
+          }
+          .ended-check {
+            gap: 0.3rem;
+            color: colours.$grey-70;
+            img {
+              width: 1rem;
+            }
+            .ended-text {
+              font-size: 0.875rem;
+            }
+          }
         }
       }
 

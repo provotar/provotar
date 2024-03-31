@@ -18,14 +18,25 @@ const checkActivity = () => {
   }
 };
 
+let navRoute = route.currentRoute.value.name;
+
+watch(() => route.currentRoute.value.name, (newValue, oldValue) => {
+  navRoute = newValue;
+})
+
 onMounted(() => {
-  window.addEventListener("mousemove", setUserActive);
-  window.addEventListener("keydown", setUserActive);
 
-  checkActivity();
+  if (navRoute !== 'vote-id-result' && navRoute !== 'vote-id' && navRoute !== 'login') {
 
-  sessionTimeOut = setInterval(checkActivity, 300000);
+    window.addEventListener("mousemove", setUserActive);
+    window.addEventListener("keydown", setUserActive);
+
+    checkActivity();
+
+    sessionTimeOut = setInterval(checkActivity, 300000);
+  }
 }),
+
   onBeforeUnmount(() => {
     window.addEventListener("mousemove", setUserActive);
     window.addEventListener("keydown", setUserActive);
@@ -43,5 +54,7 @@ const logOutUser = async () => {
 </script>
 
 <template>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

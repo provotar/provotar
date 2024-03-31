@@ -1,5 +1,10 @@
 <script setup>
-defineEmits(['closePollSuccess'])
+defineEmits(['closePollSuccess', 'copyLink'])
+
+defineProps({
+    linkCopied: Boolean,
+    default: false
+})
 </script>
 <template>
     <ModalsCore modal_class="success-modal">
@@ -18,12 +23,20 @@ defineEmits(['closePollSuccess'])
                     </div>
 
                     <div class="modal_ctas flex-col">
-                        <Buttons btn_class="sml_btn pry_grey copylink">
+                        <Buttons v-if="linkCopied" btn_class="sml_btn pry_grey copylink">
+                            Link copied
+                            <template #icon>
+                                <PhosphorIconCopy :size="16" weight="bold" />
+                            </template>
+                        </Buttons>
+                        <Buttons v-else btn_class="sml_btn pry_grey copylink" @click="$emit('copyLink')">
                             Copy poll link
                             <template #icon>
                                 <PhosphorIconCopy :size="16" weight="bold" />
                             </template>
                         </Buttons>
+
+
 
                         <Buttons @click="$emit('closePollSuccess')" btn_class="sml_btn pry_purple"> All done
                         </Buttons>

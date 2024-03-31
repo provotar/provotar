@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '~/store/user';
+const route = useRouter();
 
 const userStore = useUserStore();
 
@@ -11,15 +12,16 @@ watch(() => userStore.details, (newValue, oldValue) => {
     userDetails.value = newValue;
 });
 
+let navRoute = route.currentRoute.value.path;
+
+watch(() => route.currentRoute.value.path, (newValue, oldValue) => {
+    navRoute = newValue;
+})
+
+
 // logout user
 const logOutUser = () => {
     userStore.logOutUser()
-}
-
-
-const selectedTab = ref(1);
-const selectTab = (tab) => {
-    selectedTab.value = tab;
 }
 
 onMounted(() => {
@@ -48,28 +50,20 @@ onMounted(() => {
             <div class="menu_list_group flex-col">
 
                 <!-- my polls -->
-                <NavSidenavmenu class="side_menu flex-row" @sideMenu_click=selectTab(1)
-                    :sideMenu_class="selectedTab === 1 ? 'active_menu' : ''" @click="$emit('selectViewOne')">
-                    <template #side_menu_icon>
-                        <PhosphorIconFlagPennant v-if="selectedTab === 1" :size="20" weight="fill" />
-                        <PhosphorIconFlagPennant v-else :size="20" weight="bold" />
-                    </template>
-                    <template #side_menu_name>
-                        <p class="side_menu_text">My Polls</p>
-                    </template>
-                </NavSidenavmenu>
+                <NuxtLink to="/mypolls">
+                    <NavSidenavmenu class="side_menu flex-row"
+                        :sideMenu_class="navRoute === '/mypolls' ? 'active_menu' : ''">
+                        <template #side_menu_icon>
 
-                <!-- Organisations -->
-                <NavSidenavmenu class="side_menu flex-row" @sideMenu_click=selectTab(2)
-                    :sideMenu_class="selectedTab === 2 ? 'active_menu' : ''" @click="$emit('selectViewTwo')">
-                    <template #side_menu_icon>
-                        <PhosphorIconUsersThree v-if="selectedTab === 2" :size="20" weight="fill" />
-                        <PhosphorIconUsersThree v-else :size="20" weight="bold" />
-                    </template>
-                    <template #side_menu_name>
-                        <p class="side_menu_text">Organisations</p>
-                    </template>
-                </NavSidenavmenu>
+                            <PhosphorIconFlagPennant v-if="navRoute === '/mypolls'" :size="20" weight="fill" />
+                            <PhosphorIconFlagPennant v-else :size="20" weight="bold" />
+                        </template>
+                        <template #side_menu_name>
+                            <p class="side_menu_text">My Polls</p>
+                        </template>
+                    </NavSidenavmenu>
+                </NuxtLink>
+
             </div>
 
             <div class="menu_group flex-col">
@@ -77,23 +71,24 @@ onMounted(() => {
                 <div class="menu_list_group flex-col">
 
                     <!-- Preferences -->
-                    <NavSidenavmenu class="side_menu flex-row" @sideMenu_click=selectTab(3)
-                        :sideMenu_class="selectedTab === 3 ? 'active_menu' : ''" @click="$emit('selectViewThree')">
-                        <template #side_menu_icon>
-                            <PhosphorIconSlidersHorizontal v-if="selectedTab === 3" :size="20" weight="fill" />
-                            <PhosphorIconSlidersHorizontal v-else :size="20" weight="bold" />
-                        </template>
-                        <template #side_menu_name>
-                            <p class="side_menu_text">Preferences</p>
-                        </template>
-                    </NavSidenavmenu>
+                    <NuxtLink to="/preferences">
+                        <NavSidenavmenu class="side_menu flex-row"
+                            :sideMenu_class="navRoute === '/preferences' ? 'active_menu' : ''">
+                            <template #side_menu_icon>
+                                <PhosphorIconSlidersHorizontal v-if="navRoute === '/preferences'" :size="20"
+                                    weight="fill" />
+                                <PhosphorIconSlidersHorizontal v-else :size="20" weight="bold" />
+                            </template>
+                            <template #side_menu_name>
+                                <p class="side_menu_text">Preferences</p>
+                            </template>
+                        </NavSidenavmenu>
+                    </NuxtLink>
 
                     <!-- Notifications -->
-                    <NavSidenavmenu class="side_menu flex-row" @sideMenu_click=selectTab(4)
-                        :sideMenu_class="selectedTab === 4 ? 'active_menu' : ''" @click="$emit('selectViewFour')">
+                    <NavSidenavmenu class="side_menu flex-row">
                         <template #side_menu_icon>
-                            <PhosphorIconBell v-if="selectedTab === 4" :size="20" weight="fill" />
-                            <PhosphorIconBell v-else :size="20" weight="bold" />
+                            <PhosphorIconBell :size="20" weight="bold" />
                         </template>
                         <template #side_menu_name>
                             <p class="side_menu_text">Notifications</p>
@@ -101,16 +96,18 @@ onMounted(() => {
                     </NavSidenavmenu>
 
                     <!-- Subscription -->
-                    <NavSidenavmenu class="side_menu flex-row" @sideMenu_click=selectTab(5)
-                        :sideMenu_class="selectedTab === 5 ? 'active_menu' : ''" @click="$emit('selectViewFive')">
-                        <template #side_menu_icon>
-                            <PhosphorIconCardholder v-if="selectedTab === 5" :size="20" weight="fill" />
-                            <PhosphorIconCardholder v-else :size="20" weight="bold" />
-                        </template>
-                        <template #side_menu_name>
-                            <p class="side_menu_text">Subscription</p>
-                        </template>
-                    </NavSidenavmenu>
+                    <NuxtLink to="/subscription">
+                        <NavSidenavmenu class="side_menu flex-row"
+                            :sideMenu_class="navRoute === '/subscription' ? 'active_menu' : ''">
+                            <template #side_menu_icon>
+                                <PhosphorIconCardholder v-if="navRoute === '/subscription'" :size="20" weight="fill" />
+                                <PhosphorIconCardholder v-else :size="20" weight="bold" />
+                            </template>
+                            <template #side_menu_name>
+                                <p class="side_menu_text">Subscription</p>
+                            </template>
+                        </NavSidenavmenu>
+                    </NuxtLink>
                 </div>
             </div>
 

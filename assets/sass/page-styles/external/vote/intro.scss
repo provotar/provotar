@@ -1,0 +1,56 @@
+@use "../../../utils/colours";
+@import "../../../utils/typography";
+
+.intro-template {
+  margin-top: 8rem;
+}
+.intro-wrapper,
+.intro-main,
+.vote-intro-content,
+.poll-ended-wrapper,
+.poll-ended-content,
+.poll-ended-main {
+  align-items: center;
+}
+
+.intro-wrapper,
+.poll-ended-wrapper {
+  gap: 2.88rem;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.intro-main,
+.poll-ended-main {
+  gap: 1.5rem;
+}
+.vote-intro-content,
+.poll-ended-content {
+  gap: 0.6rem;
+}
+
+.vote-intro-title,
+.poll-ended-title {
+  @include h1($semibold);
+  text-align: center;
+  width: 80%;
+  color: colours.$grey-90;
+}
+.vote-intro-msg,
+.poll-ended-msg {
+  text-align: center;
+  width: 80%;
+  line-height: 145%;
+  color: colours.$grey-60;
+  font-weight: 400;
+}
+
+.vote-intro-form {
+  gap: 1rem;
+  width: 70%;
+  align-items: center;
+
+  .lg_btn {
+    width: max-content;
+  }
+}
