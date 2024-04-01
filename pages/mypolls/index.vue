@@ -80,7 +80,7 @@ onMounted(() => {
 
             <div class="pollRack userPolls" v-if="userPolls.length >= 1">
                 <NuxtLink class="pollCard flex-col" v-for="polls in userPolls" :key="polls.id"
-                    :to="`/mypolls/${polls.id}`">
+                    :to="`/mypolls/${polls.id}/`">
                     <img src="/images/icons/poll_flag.svg" alt="poll_flag">
                     <div class="pollCardContent flex-col">
                         <p class="pollCardName">{{ polls.poll_name }}</p>

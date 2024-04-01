@@ -24,24 +24,24 @@ watch(() => route.currentRoute.value.name, (newValue, oldValue) => {
   navRoute = newValue;
 })
 
-onMounted(() => {
+// onMounted(() => {
 
-  if (navRoute !== 'vote-id-result' && navRoute !== 'vote-id' && navRoute !== 'login') {
+//   if (navRoute !== 'vote-id-result' && navRoute !== 'vote-id' && navRoute !== 'login' && navRoute !== 'vote-id-slides') {
 
-    window.addEventListener("mousemove", setUserActive);
-    window.addEventListener("keydown", setUserActive);
+//     window.addEventListener("mousemove", setUserActive);
+//     window.addEventListener("keydown", setUserActive);
 
-    checkActivity();
+//     checkActivity();
 
-    sessionTimeOut = setInterval(checkActivity, 300000);
-  }
-}),
+//     sessionTimeOut = setInterval(checkActivity, 300000);
+//   }
+// }),
 
-  onBeforeUnmount(() => {
-    window.addEventListener("mousemove", setUserActive);
-    window.addEventListener("keydown", setUserActive);
-    clearInterval(sessionTimeOut);
-  });
+//   onBeforeUnmount(() => {
+//     window.addEventListener("mousemove", setUserActive);
+//     window.addEventListener("keydown", setUserActive);
+//     clearInterval(sessionTimeOut);
+//   });
 
 const logOutUser = async () => {
   try {

@@ -1,0 +1,15 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.invitees {
+  gap: 1.5rem;
+
+  .invitee-wrapper {
+    .viewHeader {
+      @include h3($semibold);
+    }
+    .invitee-cta {
+      gap: 1.5rem;
+    }
+  }
+}

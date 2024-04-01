@@ -149,7 +149,7 @@ onMounted(() => {
                                 </template>
                             </Buttons>
                             <OptionsMenuPollDetails :is-live="poll.isLive" v-if="isPollOptionsOpen"
-                                @endPoll="openModal(endPollModal)" />
+                                @endPoll="openModal(endPollModal)" :pollId="pollId" />
                         </div>
 
 

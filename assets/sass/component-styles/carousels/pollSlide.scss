@@ -1,0 +1,73 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.poll-slide {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 3rem;
+  gap: 4rem;
+
+  .top-section {
+    gap: 0.5rem;
+    .outer-bar {
+      width: 100%;
+      height: 0.75rem;
+      background-color: colours.$grey-20;
+      border: none;
+      border-radius: 1.25rem;
+
+      .inner-bar {
+        background-color: colours.$purple-50;
+        height: 0.75rem;
+        border-radius: 1.25rem;
+      }
+    }
+
+    // .progress-count {
+    //   align-self: flex-end;
+    // }
+  }
+  .poll-slide-content {
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .poll-slide-title {
+      @include xl($bold);
+      color: colours.$grey-90;
+      line-height: 113.5%;
+      width: 50%;
+      .highlight {
+        color: colours.$purple-40;
+      }
+    }
+
+    .slide-candidates {
+      gap: 1.2rem;
+
+      .poll-slide-candidate {
+        gap: 1rem;
+        padding: 1.5rem 10rem 1.5rem 1rem;
+        border: 1px solid colours.$grey-40;
+        border-radius: 0.5625rem;
+        cursor: pointer;
+
+        label {
+          font-size: 1rem;
+          font-weight: 600;
+          color: colours.$grey-90;
+        }
+      }
+      .poll-slide-candidate:hover {
+        border: 1px solid colours.$purple-20;
+      }
+    }
+  }
+
+  .slide-ctas {
+    align-self: flex-end;
+    gap: 4rem;
+    p {
+      cursor: pointer;
+    }
+  }
+}
