@@ -2,15 +2,18 @@
 defineEmits(['endPoll', 'resumePoll', 'invite'])
 defineProps({
     isLive: Boolean,
-})
+    pollId: String,
+});
 </script>
 
 <template>
     <div class="poll-details-option flex-col">
-        <div class="menu-list invite flex-row">
-            <PhosphorIconPaperPlaneTilt :size="20" />
-            <p class="menu-text">Send Invite</p>
-        </div>
+        <NuxtLink :to="`/mypolls/${pollId}/invitees`">
+            <div class="menu-list invite flex-row">
+                <PhosphorIconPaperPlaneTilt :size="20" />
+                <p class="menu-text">Invitee list</p>
+            </div>
+        </NuxtLink>
         <div v-if="isLive" class="menu-list endpoll flex-row" @click="$emit('endPoll')">
             <PhosphorIconFlag :size="20" />
             <p class="menu-text">End Poll</p>
