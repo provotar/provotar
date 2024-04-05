@@ -1,0 +1,41 @@
+@use "../../utils/colours";
+
+.load-poll-detail {
+  gap: 4rem;
+  margin-top: -2rem;
+
+  .grey {
+    background-color: colours.$grey-20;
+  }
+  .poll-head {
+    gap: 2rem;
+    .circle {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 10rem;
+    }
+    .title-row {
+      width: 100%;
+      height: 4.5rem;
+      border-radius: 0.8rem;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 4rem;
+      .load-card {
+        height: 9rem;
+        border-radius: 0.6rem;
+      }
+    }
+  }
+
+  .poll-stats {
+    gap: 1rem;
+    .tall-card {
+      height: 25rem;
+      border-radius: 0.6rem;
+    }
+  }
+}

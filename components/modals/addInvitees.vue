@@ -1,30 +1,35 @@
 <script setup>
+
 import { v4 as uuidv4 } from "uuid";
 const props = defineProps({
     pollId: String,
+    savedInvitees: Array,
 })
-defineEmits(['closeModal'])
+const emit = defineEmits(['storeInvitees', 'deleteInvitee'])
 const newInviteEmail = ref();
-const savedInvitees = ref([]);
+
+
+
 const addInviteeEmail = () => {
-    savedInvitees.value.push({
+    props.savedInvitees.push({
         invitee_email: newInviteEmail.value,
         invitee_id: uuidv4(),
+        editMode: false,
         pollId: props.pollId,
-        hasVoted: false,
-        editMode: false
     })
     newInviteEmail.value = ''
 }
 // toggle edit invitee
 const toggleEditMode = (id) => {
-    const invitee_dets = savedInvitees.value.find(invitee => invitee.invitee_id === id);
+    const invitee_dets = props.savedInvitees.find(invitee => invitee.invitee_id === id);
     invitee_dets.editMode = !invitee_dets.editMode;
 }
 
 const deleteInvitee = (id) => {
-    savedInvitees.value = savedInvitees.value.filter(invitee => invitee.invitee_id !== id)
+    emit('deleteInvitee', id)
 }
+
+
 </script>
 
 <template>
@@ -49,7 +54,7 @@ const deleteInvitee = (id) => {
                 </form>
 
                 <div class="invitee-list-wrapper flex-col">
-                    <p class="special-caps-title invitee-list-title">INVITEES</p>
+                    <p class="special-caps-title invitee-list-title">INVITEES ({{ savedInvitees.length }})</p>
                     <div class="invitee-dets-wrapper flex-col">
                         <div class="invitee-dets" v-for="invitee in savedInvitees">
 
@@ -103,7 +108,10 @@ const deleteInvitee = (id) => {
                 </div>
             </div>
             <div class="modal-footer-actions flex-row">
-                <Buttons @click="$emit('closeModal')" btn_class="sml_btn pry_purple">Save changes</Buttons>
+                <Buttons v-if="savedInvitees.length === 0" btn_class="sml_btn pry_purple_disabled">Send invite</Buttons>
+
+                <Buttons v-else @click="$emit('storeInvitees')" btn_class="sml_btn pry_purple">Send invite</Buttons>
+
             </div>
         </template>
     </ModalsCore>

@@ -1,0 +1,24 @@
+@use "../../utils/colours";
+
+.table-skeleton-loader {
+  gap: 2.5rem;
+  width: 100%;
+  .table-head-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 6rem;
+    .table-row {
+      height: 2rem;
+    }
+  }
+
+  .table-data {
+    gap: 1rem;
+  }
+  .table-row {
+    width: 100%;
+    height: 4.5rem;
+    background-color: colours.$grey-20;
+    border-radius: 0.8rem;
+  }
+}

@@ -9,7 +9,7 @@ definePageMeta({
 })
 
 const usePoll = usePollStore();
-
+const loadingPollDetails = ref(false);
 const route = useRoute();
 const pollId = ref(route.params.id);
 
@@ -25,6 +25,7 @@ const getPollDets = async () => {
             .eq("id", `${pollId.value}`)
         if (data) {
             pollDetails.value = data;
+            loadingPollDetails.value = false
         }
 
     }
@@ -98,6 +99,7 @@ const endPoll = () => {
 
 
 onMounted(() => {
+    loadingPollDetails.value = true;
     getPollDets();
 
 })
@@ -207,6 +209,7 @@ onMounted(() => {
 
             </div>
         </div>
+        <LoadingstatesLoadPollDetails v-if="loadingPollDetails" />
         <ModalsConfirmEndPoll v-if="endPollModal.isOpen" @closeModal="closeModal(endPollModal)"
             @confirmEndPoll="endPoll()" />
 

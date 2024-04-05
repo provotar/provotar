@@ -5,6 +5,7 @@
   gap: 1.5rem;
 
   .invitee-wrapper {
+    gap: 3rem;
     .viewHeader {
       @include h3($semibold);
     }

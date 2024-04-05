@@ -3,20 +3,16 @@ import { v4 as uuidv4 } from "uuid";
 
 export const usePollStore = defineStore("polls", {
   state: () => ({
-    // userPolls: null,
     userPolls: [],
     loadingPolls: true,
     noPolls: false,
     pollDets: [],
     accountID: null,
+    inviteList: [],
     newPoll: {
       pollTitle: "",
       pollID: "",
-
       positions: [],
-      // positionName: "",
-      // positionId: uuidv4(), //To pass to position table
-      // pollCandidates: [],
     },
   }),
 
@@ -73,6 +69,7 @@ export const usePollStore = defineStore("polls", {
       this.accountID = userDets[0].accountId;
     },
 
+    // create poll
     async createPoll() {
       const supabase = useSupabaseClient();
       const user = useSupabaseUser();
@@ -129,6 +126,31 @@ export const usePollStore = defineStore("polls", {
         }
       } catch (error) {
         console.log(error);
+      }
+    },
+
+    storeInvitees(list) {
+      this.inviteList = list;
+    },
+
+    async saveInviteesToDB() {
+      const supabase = useSupabaseClient();
+      const user = useSupabaseUser();
+      const route = useRouter();
+
+      if (user.value && this.inviteeList.length !== 0) {
+        try {
+          const { data } = await supabase.from("invitees").insert(
+            this.inviteeList.map((invitee) => ({
+              id: invitee.invitee_id,
+              email: invitee.invitee_email,
+              hasVoted: false,
+              poll_id: invitee.pollId,
+            }))
+          );
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },

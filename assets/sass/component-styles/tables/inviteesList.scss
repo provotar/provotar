@@ -1,0 +1,56 @@
+@use "../../utils/colours";
+@import "../../utils/typography";
+
+.invite-list {
+  border-collapse: collapse;
+  width: 100%;
+  th,
+  td {
+    text-align: left;
+    padding: 1.12rem;
+  }
+  th {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: colours.$grey-60;
+  }
+  .table-header,
+  tbody tr {
+    border-bottom: 0.6px solid colours.$brown-40;
+  }
+
+  tbody {
+    // td {
+    //   padding: 1.5rem;
+    // }
+    .invitee-email {
+      font-weight: 600;
+      color: colours.$grey-90;
+    }
+    .date-invited {
+      color: colours.$grey-60;
+    }
+    .not-voted {
+      color: colours.$grey-60;
+      font-weight: 600;
+    }
+
+    .badge {
+      align-items: center;
+      padding: 0.25rem 1rem;
+      border-radius: 0.375rem;
+      border: none;
+      width: max-content;
+      p {
+        font-weight: 600;
+      }
+    }
+    .green {
+      background-color: colours.$green-10;
+      color: colours.$green-70;
+    }
+    .grey {
+      padding: 0.25rem 0rem;
+    }
+  }
+}
