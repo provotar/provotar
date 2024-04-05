@@ -17,14 +17,21 @@
 @import "component-styles/modals/editPosition.scss";
 @import "component-styles/modals/newInvitees.scss";
 
-// optioms
+// options
 @import "component-styles/optionsMenu/polls/polldetails.scss";
 
 // carousels
 @import "component-styles/carousels/pollSlide.scss";
 
+//tables
+@import "component-styles/tables/inviteesList.scss";
+
 // emptystates
 @import "component-styles/emptystates/core.scss";
+
+// loading states
+@import "component-styles/loadingstates/loadtable.scss";
+@import "component-styles/loadingstates/loadpolldetails.scss";
 
 // pages
 @import "page-styles/login.scss";

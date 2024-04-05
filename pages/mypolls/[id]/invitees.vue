@@ -1,15 +1,27 @@
 <script setup>
+import { usePollStore } from '~/store/polls';
 const supabase = useSupabaseClient();
+
+useHead({
+    title: 'Provotar | Invitees'
+})
 definePageMeta({
     layout: "dashboard"
 })
 
+
 const route = useRoute();
+const usePolls = usePollStore();
 const pollId = ref(route.params.id);
 const inviteeList = ref([])
 const inviteeDetails = ref([])
 
+const loadingInvitees = ref(false);
+const emptyInvites = ref(false)
+
 const newInviteModal = ref({ isOpen: false });
+const confirmSaveInvitees = ref({ isOpen: false });
+const voteInviteSent = ref({ isOpen: false })
 
 const openModal = (modal) => {
     modal.isOpen = true;
@@ -26,19 +38,50 @@ const getPollDets = async () => {
             .from("polls")
             .select("*, invitees(*)")
             .eq("id", `${pollId.value}`)
-        if (data) {
+        if (data[0].length > 0) {
             inviteeDetails.value = data;
             inviteeList.value = inviteeDetails.value[0].invitees
+            loadingInvitees.value = false
+        } else {
+            loadingInvitees.value = false
+            emptyInvites.value = true
         }
 
     }
     catch (error) {
         console.log(error);
     }
+};
+
+const savedInvitees = ref([]);
+
+// deleteInvitee emit
+const deleteInvitee = (id) => {
+    savedInvitees.value = savedInvitees.value.filter(invitee => invitee.invitee_id !== id)
 }
 
+// saved poll to store
+const saveInviteeToStore = () => {
+    if (savedInvitees.value.length !== 0) {
+        usePolls.inviteeList = savedInvitees.value;
+        closeModal(newInviteModal.value)
+        openModal(confirmSaveInvitees.value)
+    }
+}
+// confirm modal to invitee list modal
+const backToInviteModal = () => {
+    closeModal(confirmSaveInvitees.value);
+    openModal(newInviteModal.value);
+}
+
+const saveInviteeToDB = () => {
+    console.log(usePolls.inviteeList);
+    usePolls.saveInviteesToDB();
+    closeModal(confirmSaveInvitees.value)
+}
 
 onMounted(() => {
+    loadingInvitees.value = true
     getPollDets();
 })
 </script>
@@ -58,13 +101,21 @@ onMounted(() => {
                 </div>
             </div>
 
-            <div v-if="inviteeList.length">
-                <h1>There are invitees</h1>
+            <LoadingstatesLoadInvitess v-if="loadingInvitees" />
+
+            <div v-if="inviteeList.length > 0">
+                <TablesInviteeList :inviteeList="inviteeList" />
             </div>
-            <EmptystatesPollsNoInvitees v-else @sendNewInvite="openModal(newInviteModal)" />
+            <EmptystatesPollsNoInvitees v-if="emptyInvites" @sendNewInvite="openModal(newInviteModal)" />
         </div>
 
-        <ModalsAddInvitees v-if="newInviteModal.isOpen" @closeModal="closeModal(newInviteModal)" :pollId="pollId" />
+        <ModalsAddInvitees v-if="newInviteModal.isOpen" @closeModal="closeModal(newInviteModal)" :pollId="pollId"
+            :savedInvitees="savedInvitees" @deleteInvitee="deleteInvitee" @storeInvitees="saveInviteeToStore()" />
+
+        <ModalsConfirmSaveInvitees v-if="confirmSaveInvitees.isOpen" @goBack="backToInviteModal()"
+            @confirmAddInvitees="saveInviteeToDB()" />
+
+        <ModalsSuccessVoteInviteSent v-if="voteInviteSent.isOpen" @closeInviteSent="closeModal(voteInviteSent)" />
     </div>
 
 </template>
