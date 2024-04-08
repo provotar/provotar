@@ -4,6 +4,8 @@ const route = useRoute();
 const pollID = ref(route.params.id);
 const pollDetails = ref([]);
 
+const userVotes = ref()
+
 const getPollDets = async () => {
     try {
         const { data, error } = await supabase
@@ -117,7 +119,7 @@ onMounted(() => {
 
                                 </div>
 
-                                <p class="percentage-value">{{ votePercentage(candidate.id) }} %</p>
+                                <p class="percentage-value">{{ votePercentage(candidate.id).toFixed(1) }} %</p>
                             </div>
                         </div>
                     </div>

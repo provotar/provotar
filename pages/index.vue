@@ -6,9 +6,7 @@ useHead({
 })
 
 
-onMounted(() => {
-    usePolls.getPolls();
-})
+
 
 </script>
 
