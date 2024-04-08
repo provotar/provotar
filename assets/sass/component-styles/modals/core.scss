@@ -30,3 +30,7 @@
 .modal_title {
   @include h5($semibold);
 }
+.modal-subtitle {
+  text-align: center;
+  width: 70%;
+}

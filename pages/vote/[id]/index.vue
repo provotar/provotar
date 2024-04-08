@@ -1,29 +1,42 @@
 <script setup>
 const supabase = useSupabaseClient();
 const route = useRoute();
+const router = useRouter();
 
 
 useHead({
     title: 'Provotar | Vote'
 })
-
-const voteID = ref(route.params.id);
 definePageMeta({
     layout: "default"
 })
 
+const voteID = ref(route.params.id);
+
 const voteDetails = ref([]);
+const inviteeList = ref([])
+const loader = ref(false)
+const invalidLink = ref(false)
+const notInvited = ref(false);
+
+const votersEmail = ref('');
+const inviteeDets = ref([]);
+const voterID = ref();
+
 
 const getVoteDets = async () => {
     try {
         const { data, error } = await supabase
             .from("polls")
-            .select("*, votes(*), positions(*, candidates(*))")
+            .select("*, votes(*), invitees(*), positions(*, candidates(*))")
             .eq("id", `${voteID.value}`)
-        if (data) {
+        if (data[0]) {
             voteDetails.value = data;
-        } else if (error) {
-            console.log(error);
+            loader.value = false
+            inviteeList.value = voteDetails.value[0].invitees
+        } else {
+            loader.value = false
+            invalidLink.value = true;
         }
 
     }
@@ -32,15 +45,32 @@ const getVoteDets = async () => {
     }
 }
 
-const votersEmail = ref('');
-const voterID = ref()
 
-// const startVote = () => {
-//     console.log(route);
-//     route.push(`/vote/${voteID.value}/slides`)
-// }
+
+
+
+const startVote = () => {
+    inviteeDets.value = inviteeList.value.find(invitee => invitee.email === votersEmail.value)
+    if (inviteeDets.value) {
+        // route to votes
+        if (!inviteeDets.value.hasVoted) {
+            console.log(inviteeDets.value);
+            router.push(`/vote/${voteID.value}/voteslides/${inviteeDets.value.id}`)
+        } else {
+            // route to hasVoted
+            router.push(`/vote/${voteID.value}/hasVoted`)
+
+        }
+    } else {
+        // not invited
+        console.log('not invited');
+        notInvited.value === true;
+    }
+
+}
 
 onMounted(() => {
+    loader.value = true
     getVoteDets();
 
 })
@@ -48,7 +78,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="intro-template">
+    <div class="intro-template flex-col">
         <div class="intro-template" v-if="voteDetails[0]">
             <div v-for="details in voteDetails" class="flex-col">
                 <div v-if="details.isLive" class="intro-wrapper flex-col">
@@ -68,13 +98,14 @@ onMounted(() => {
                             <template #label>
                                 Email Address
                             </template>
+
                         </Inputs>
 
-                        <NuxtLink :to="`/vote/${voteID}/voteslides/${voterID}`" v-if="votersEmail !== ''">
-                            <Buttons btn_class="lg_btn pry_purple">Start
+                        <div v-if="votersEmail !== ''">
+                            <Buttons btn_class="lg_btn pry_purple" @btn_click="startVote()">Start
                                 Voting
                             </Buttons>
-                        </NuxtLink>
+                        </div>
                         <Buttons v-else btn_class="lg_btn pry_purple_disabled">Start Voting</Buttons>
                     </div>
 
@@ -98,7 +129,7 @@ onMounted(() => {
             </div>
 
         </div>
-        <div v-else class="poll-ended-wrapper flex-col">
+        <div v-if="invalidLink" class="poll-ended-wrapper flex-col">
             <div class="poll-ended-main flex-col">
                 <img src="/images/illustrations/broken_link.svg" alt="red_pollbox_circle">
                 <div class="poll-ended-content flex-col">
@@ -109,5 +140,15 @@ onMounted(() => {
             </div>
 
         </div>
+        <LoadingstatesLoadlogo v-if="loader" />
+        <ToastsError v-if="notInvited" class="authMessage">
+            <template #toastMessage>
+                <p class="toastMessage"> You were not invited to vote in this poll </p>
+            </template>
+            <template #icon>
+                <PhosphorIconX :size="16" weight="bold" />
+            </template>
+        </ToastsError>
     </div>
+
 </template>
