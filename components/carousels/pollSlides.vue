@@ -30,7 +30,6 @@ watch(selectedOptions.value, (newValue) => {
 // save vote options to pinia store
 const saveVotes = () => {
     useVote.voteSelection = selectedOptionsArray.value
-    console.log(useVote.voteSelection, 'submitted');
 }
 
 

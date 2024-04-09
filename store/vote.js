@@ -16,6 +16,8 @@ export const useVoteStore = defineStore("vote", {
             id: uuidv4(),
             candidate_id: votes.candidate_id,
             poll_id: votes.poll_id,
+            position_id: votes.position_id,
+            invitee_id: this.inviteeId,
           }))
         );
       } catch (err) {
