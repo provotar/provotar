@@ -13,6 +13,9 @@ const loadingPollDetails = ref(false);
 const route = useRoute();
 const pollId = ref(route.params.id);
 
+const positionVotes = ref([]);
+const totalCandidates = ref(0);
+
 
 const pollDetails = ref([]);
 const userVotes = ref(0)
@@ -23,9 +26,14 @@ const getPollDets = async () => {
             .from("polls")
             .select("*, votes(*), positions(*, candidates(*))")
             .eq("id", `${pollId.value}`)
-        if (data) {
+        if (data[0]) {
             pollDetails.value = data;
             loadingPollDetails.value = false
+            // get total candidates
+            pollDetails.value[0].positions.forEach((position) => {
+                totalCandidates.value += position.candidates.length
+            });
+
         }
 
     }
@@ -34,19 +42,22 @@ const getPollDets = async () => {
     }
 }
 
+
+
 // get individual vote
 const filteredVotes = (user_id) => {
     if (pollDetails.value[0] && pollDetails.value[0].votes.length !== 0) {
-        return pollDetails.value[0].votes.filter(({ candidate_id }) => candidate_id === `${user_id}`).length
+        return pollDetails.value[0].votes.filter(({ candidate_id }) => candidate_id === user_id).length
     } else {
         return 0
     }
 }
 // get vote percentage-value
-const votePercentage = (user_id) => {
-    if (pollDetails.value[0] && pollDetails.value[0].votes.length !== 0) {
-        userVotes.value = pollDetails.value[0].votes.filter(({ candidate_id }) => candidate_id === `${user_id}`).length
-        const totalVotes = pollDetails.value[0].votes.length;
+const votePercentage = (user_id, position_id) => {
+    if (pollDetails.value[0].votes.length !== 0) {
+        positionVotes.value = pollDetails.value[0].votes.filter(vote => vote.position_id === position_id)
+        userVotes.value = positionVotes.value.filter(({ candidate_id }) => candidate_id === user_id).length
+        const totalVotes = positionVotes.value.length;
 
         return (userVotes.value / totalVotes) * 100
     } else {
@@ -102,7 +113,9 @@ onMounted(() => {
     loadingPollDetails.value = true;
     getPollDets();
 
+
 })
+
 
 </script>
 
@@ -169,7 +182,7 @@ onMounted(() => {
                             <img src="/images/icons/total_candidates_icon.svg" alt="total_candidates_icon">
                             <div class="poll-stat-dets flex-col">
                                 <p class="poll-stat-title">Total Candidates</p>
-                                <p class="poll-stat-value">{{ poll.positions[0].candidates.length }}</p>
+                                <p class="poll-stat-value">{{ totalCandidates }}</p>
                             </div>
                         </div>
 
@@ -179,7 +192,7 @@ onMounted(() => {
                 <div class="poll-data-wrapper flex-col">
                     <p class="poll-data-title">Poll Statistics</p>
 
-                    <div class="poll-data-main flex-col" v-for="positions in poll.positions">
+                    <div class="poll-data-main flex-col" v-for="positions in poll.positions" :key="positions.id">
                         <div class="poll-data-header flex-row">
                             <p class="position-name">{{ positions.position_name }}</p>
                             <div class="see-polls-dropdown flex-row">
@@ -200,7 +213,8 @@ onMounted(() => {
 
                                 </div>
 
-                                <p class="percentage-value">{{ votePercentage(candidate.id) }} %</p>
+                                <p class="percentage-value">{{ votePercentage(candidate.id, positions.id) }}
+                                    % </p>
                             </div>
                         </div>
                     </div>
