@@ -103,7 +103,7 @@ onMounted(() => {
 
             <div class="pollRack" v-if="noPolls">
                 <div class="start_poll_card flex-row">
-                    <Buttons btn_class="sml_btn pry_white" @click="$emit('createPoll')">
+                    <Buttons btn_class="sml_btn pry_white" @click="openModal(pollNameModal)">
                         <template #icon>
                             <PhosphorIconPlus :size="16" weight="bold" />
                         </template>
