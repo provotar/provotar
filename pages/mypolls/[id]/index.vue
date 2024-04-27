@@ -13,27 +13,22 @@ const loadingPollDetails = ref(false);
 const route = useRoute();
 const pollId = ref(route.params.id);
 
-const positionVotes = ref([]);
-const totalCandidates = ref(0);
-
 
 const pollDetails = ref([]);
-const userVotes = ref(0)
+const positions = ref([])
+
 
 const getPollDets = async () => {
+    loadingPollDetails.value = true;
     try {
-        const { data, error } = await supabase
+        const { data: polldata, error } = await supabase
             .from("polls")
             .select("*, votes(*), positions(*, candidates(*))")
             .eq("id", `${pollId.value}`)
-        if (data[0]) {
-            pollDetails.value = data;
-            loadingPollDetails.value = false
-            // get total candidates
-            pollDetails.value[0].positions.forEach((position) => {
-                totalCandidates.value += position.candidates.length
-            });
-
+        if (polldata[0]) {
+            pollDetails.value = polldata;
+            positions.value = polldata[0].positions
+            loadingPollDetails.value = false;
         }
 
     }
@@ -41,6 +36,24 @@ const getPollDets = async () => {
         console.log(error);
     }
 }
+
+
+if (pollDetails.value[0]) {
+    pollDetails.value[0].positions.forEach((position) => {
+        totalCandidates.value += position.candidates.length
+    });
+}
+
+// total candidates
+const totalCandidates = computed(() => {
+    let total = 0;
+    if (pollDetails.value[0]) {
+        pollDetails.value[0].positions.forEach((position) => {
+            total += position.candidates.length
+        });
+    }
+    return total;
+})
 
 
 
@@ -54,12 +67,14 @@ const filteredVotes = (user_id) => {
 }
 // get vote percentage-value
 const votePercentage = (user_id, position_id) => {
-    if (pollDetails.value[0].votes.length !== 0) {
-        positionVotes.value = pollDetails.value[0].votes.filter(vote => vote.position_id === position_id)
-        userVotes.value = positionVotes.value.filter(({ candidate_id }) => candidate_id === user_id).length
-        const totalVotes = positionVotes.value.length;
 
-        return (userVotes.value / totalVotes) * 100
+    if (pollDetails.value[0].votes.length !== 0) {
+
+        const positionVotes = pollDetails.value[0].votes.filter(vote => vote.position_id === position_id)
+        const userVotes = positionVotes.filter(({ candidate_id }) => candidate_id === user_id).length
+        const totalVotes = positionVotes.length;
+
+        return (userVotes / totalVotes) * 100
     } else {
         return 0
     }
@@ -93,14 +108,6 @@ const copyLink = async () => {
 // toggle endPollModal
 const endPollModal = ref({ isOpen: false })
 
-const openModal = (modal) => {
-    modal.isOpen = true;
-    document.body.style.overflow = 'hidden';
-}
-const closeModal = (modal) => {
-    modal.isOpen = false;
-    document.body.style.overflow = '';
-}
 
 // endPoll
 const endPoll = () => {
@@ -110,9 +117,8 @@ const endPoll = () => {
 
 
 onMounted(() => {
-    loadingPollDetails.value = true;
-    getPollDets();
 
+    getPollDets();
 
 })
 
@@ -164,7 +170,7 @@ onMounted(() => {
                                 </template>
                             </Buttons>
                             <OptionsMenuPollDetails :is-live="poll.isLive" v-if="isPollOptionsOpen"
-                                @endPoll="openModal(endPollModal)" :pollId="pollId" />
+                                @endPoll="$openModal(endPollModal)" :pollId="pollId" />
                         </div>
 
 
@@ -192,9 +198,9 @@ onMounted(() => {
                 <div class="poll-data-wrapper flex-col">
                     <p class="poll-data-title">Poll Statistics</p>
 
-                    <div class="poll-data-main flex-col" v-for="positions in poll.positions" :key="positions.id">
+                    <div class="poll-data-main flex-col" v-for="position in positions" :key="position.id">
                         <div class="poll-data-header flex-row">
-                            <p class="position-name">{{ positions.position_name }}</p>
+                            <p class="position-name">{{ position.position_name }}</p>
                             <div class="see-polls-dropdown flex-row">
                                 <PhosphorIconCaretDown :size="24" />
                                 <p>See full polls</p>
@@ -202,7 +208,7 @@ onMounted(() => {
                             </div>
                         </div>
 
-                        <div class="candidate-data flex-row" v-for="candidate in positions.candidates"
+                        <div class="candidate-data flex-row" v-for="candidate in position.candidates"
                             :key="candidate.id">
                             <p class="candidate-name">{{ candidate.candidate_name }}</p>
 
@@ -213,7 +219,7 @@ onMounted(() => {
 
                                 </div>
 
-                                <p class="percentage-value">{{ votePercentage(candidate.id, positions.id) }}
+                                <p class="percentage-value">{{ votePercentage(candidate.id, position.id) }}
                                     % </p>
                             </div>
                         </div>
@@ -224,7 +230,7 @@ onMounted(() => {
             </div>
         </div>
         <LoadingstatesLoadPollDetails v-if="loadingPollDetails" />
-        <ModalsConfirmEndPoll v-if="endPollModal.isOpen" @closeModal="closeModal(endPollModal)"
+        <ModalsConfirmEndPoll v-if="endPollModal.isOpen" @closeModal="$closeModal(endPollModal)"
             @confirmEndPoll="endPoll()" />
 
 
