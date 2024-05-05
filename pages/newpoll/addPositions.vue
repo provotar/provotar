@@ -2,6 +2,7 @@
 import { usePollStore } from '~/store/polls';
 import { v4 as uuidv4 } from "uuid";
 const route = useRouter();
+const { $openModal, $closeModal } = useNuxtApp();
 
 definePageMeta({
     layout: "dashboard"
@@ -16,15 +17,7 @@ const positionToEdit = ref([]);
 const editPositionModal = ref({ isOpen: false });
 const confirmPollCreationModal = ref({ isOpen: false });
 const successPollCreatedModal = ref({ isOpen: false });
-// toggle modals
-const openModal = (modal) => {
-    modal.isOpen = true
-    document.body.style.overflow = 'hidden';
-}
-const closeModal = (modal) => {
-    modal.isOpen = false;
-    document.body.style.overflow = ''
-}
+
 
 
 // Add new position
@@ -36,12 +29,12 @@ const createPosition = () => {
     })
     // get newest Position
     positionToEdit.value = positionList.value[positionList.value.length - 1]
-    openModal(editPositionModal.value);
+    $openModal(editPositionModal.value);
 }
 // edit position modal
 const editPosition = (id) => {
     positionToEdit.value = positionList.value.find(posList => posList.pos_id === id);
-    openModal(editPositionModal.value);
+    $openModal(editPositionModal.value);
 }
 // delete position
 const deletePosition = (id) => {
@@ -54,18 +47,18 @@ const deletePosition = (id) => {
 const savePositionDetails = () => {
     usePolls.newPoll.positions = positionList.value;
     usePolls.userDetails();
-    openModal(confirmPollCreationModal.value);
+    $openModal(confirmPollCreationModal.value);
 }
 
 // save details to database
 const addPositionsToDB = () => {
     usePolls.createPoll();
-    closeModal(confirmPollCreationModal.value)
-    openModal(successPollCreatedModal.value)
+    $closeModal(confirmPollCreationModal.value)
+    $openModal(successPollCreatedModal.value)
 }
 // close success, go to home view
 const closePollSuccess = () => {
-    closeModal(successPollCreatedModal.value);
+    $closeModal(successPollCreatedModal.value);
     route.push('/mypolls')
 }
 
@@ -126,7 +119,7 @@ const copyLink = async () => {
                     <td>
                         <div class="candidate-sum flex-row" v-if="position.candidates.length">
                             <p class="candidate-fname" v-for="candidate in position.candidates" :key="candidate.id">{{
-                candidate.fullName }},
+                                candidate.fullName }},
                             </p>
                         </div>
                         <div v-else>
@@ -158,10 +151,10 @@ const copyLink = async () => {
 
 
     <ModalsEditPosition v-show="editPositionModal.isOpen" :positionDetails=positionToEdit
-        @closeModal="closeModal(editPositionModal)">
+        @closeModal="$closeModal(editPositionModal)">
     </ModalsEditPosition>
     <ModalsConfirmPollCreation v-show="confirmPollCreationModal.isOpen"
-        @closeModal="closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()">
+        @closeModal="$closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()">
 
     </ModalsConfirmPollCreation>
     <ModalsSuccessPollCreated v-show="successPollCreatedModal.isOpen" @closePollSuccess="closePollSuccess"

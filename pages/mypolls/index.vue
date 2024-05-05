@@ -1,5 +1,6 @@
 <script setup>
 import { usePollStore } from '~/store/polls';
+const { $openModal, $closeModal } = useNuxtApp();
 const route = useRouter()
 useHead({
     title: 'Provotar | My Polls'
@@ -8,17 +9,6 @@ useHead({
 definePageMeta({
     layout: "dashboard"
 })
-
-
-// toggle modal function
-const openModal = (modal) => {
-    modal.isModalOpen = true
-    document.body.style.overflow = 'hidden';
-}
-const closeModal = (modal) => {
-    modal.isModalOpen = false
-    document.body.style.overflow = ''
-}
 
 
 const usePolls = usePollStore();
@@ -41,9 +31,9 @@ watch(() => usePolls.noPolls, (newValue, oldValue) => {
 })
 
 // save poll name
-const pollNameModal = ref({ isModalOpen: false })
+const pollNameModal = ref({ isOpen: false })
 const savePollName = () => {
-    closeModal(pollNameModal.value);
+    $closeModal(pollNameModal.value);
     route.push("/newpoll/addPositions")
 }
 
@@ -58,7 +48,7 @@ onMounted(() => {
     <div class="dashView myPollsView flex-col">
         <div class="topView flex-row">
             <p class="viewHeader">My Polls</p>
-            <Buttons btn_class="sml_btn pry_purple" @btn_click="openModal(pollNameModal)">Start a poll</Buttons>
+            <Buttons btn_class="sml_btn pry_purple" @btn_click="$openModal(pollNameModal)">Start a poll</Buttons>
         </div>
         <div class="viewContent flex-col">
             <div class="tutorialCard flex-row">
@@ -103,7 +93,7 @@ onMounted(() => {
 
             <div class="pollRack" v-if="noPolls">
                 <div class="start_poll_card flex-row">
-                    <Buttons btn_class="sml_btn pry_white" @click="openModal(pollNameModal)">
+                    <Buttons btn_class="sml_btn pry_white" @click="$openModal(pollNameModal)">
                         <template #icon>
                             <PhosphorIconPlus :size="16" weight="bold" />
                         </template>
@@ -114,7 +104,7 @@ onMounted(() => {
             </div>
 
         </div>
-        <ModalsNewPoll v-if="pollNameModal.isModalOpen" @closeModal="closeModal(pollNameModal)"
+        <ModalsNewPoll v-if="pollNameModal.isOpen" @closeModal="$closeModal(pollNameModal)"
             @continue="savePollName()" />
     </div>
 
