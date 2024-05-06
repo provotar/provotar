@@ -76,8 +76,15 @@
       }
     }
   }
+
+  .duplicate-email-msg {
+    font-weight: 500;
+    line-height: 145%;
+    color: colours.$grey-60;
+  }
 }
 
 .modal-footer-actions {
   justify-content: flex-end;
+  gap: 1rem;
 }

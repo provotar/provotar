@@ -20,9 +20,15 @@ const inviteeDetails = ref([]);
 const loadingInvitees = ref(false);
 const emptyInvites = ref(false)
 
+const duplicateEmails = ref([]);
+
+
+// modals
 const newInviteModal = ref({ isOpen: false });
+const duplicateEmailModal = ref({ isOpen: false });
 const confirmSaveInvitees = ref({ isOpen: false });
-const voteInviteSent = ref({ isOpen: false })
+const voteInviteSent = ref({ isOpen: false });
+
 
 
 const getPollDets = async () => {
@@ -51,6 +57,50 @@ const getPollDets = async () => {
 
 const savedInvitees = ref([]);
 
+// get duplicate emails
+const findDuplicateEmails = () => {
+    // email and count object
+    const emailCounts = {}
+    for (const invitee of savedInvitees.value) {
+
+        if (emailCounts[invitee.invitee_email]) {
+            // add 1 to email count if email already exist
+            emailCounts[invitee.invitee_email] = emailCounts[invitee.invitee_email] + 1;
+        } else {
+            // initialise each email pair value to 1
+            emailCounts[invitee.invitee_email] = 1;
+        }
+    }
+
+
+    // filter emails with more than 1 count
+    const duplicateEmailsArray = Object.entries(emailCounts).
+        filter(([email, count]) => count > 1).
+        map(([email, count]) => {
+
+            // transform each entry to an object with email and count properties
+            return { email: email, count: count }
+        })
+
+
+    return duplicateEmailsArray;
+};
+// remove duplicate emails
+const removeDuplicateEmails = () => {
+    // new Set to keep track of unique emails
+    const emailSet = new Set();
+    const uniqueInvitees = [];
+
+    for (const invitee of savedInvitees.value) {
+        if (!emailSet.has(invitee.invitee_email)) {
+            emailSet.add(invitee.invitee_email);
+            uniqueInvitees.push(invitee);
+        }
+    }
+    savedInvitees.value = uniqueInvitees;
+    backtoEditInvitees();
+}
+
 // deleteInvitee emit
 const deleteInvitee = (id) => {
     savedInvitees.value = savedInvitees.value.filter(invitee => invitee.invitee_id !== id)
@@ -58,12 +108,24 @@ const deleteInvitee = (id) => {
 
 // saved poll to store
 const saveInviteeToStore = () => {
-    if (savedInvitees.value.length !== 0) {
+    duplicateEmails.value = findDuplicateEmails();
+    if (duplicateEmails.value.length > 0) {
+        $closeModal(newInviteModal.value);
+        $openModal(duplicateEmailModal.value);
+    } else if (savedInvitees.value.length !== 0) {
         usePolls.inviteeList = savedInvitees.value;
         $closeModal(newInviteModal.value)
         $openModal(confirmSaveInvitees.value)
     }
 }
+
+
+
+const backtoEditInvitees = () => {
+    $closeModal(duplicateEmailModal.value);
+    $openModal(newInviteModal.value)
+}
+
 // confirm modal to invitee list modal
 const backToInviteModal = () => {
     $closeModal(confirmSaveInvitees.value);
@@ -75,6 +137,8 @@ const saveInviteeToDB = () => {
     usePolls.saveInviteesToDB();
     $closeModal(confirmSaveInvitees.value)
 }
+
+
 
 onMounted(() => {
     loadingInvitees.value = true;
@@ -113,6 +177,9 @@ onMounted(() => {
             @confirmAddInvitees="saveInviteeToDB()" />
 
         <ModalsSuccessVoteInviteSent v-if="voteInviteSent.isOpen" @closeInviteSent="$closeModal(voteInviteSent)" />
+
+        <ModalsErrorinfoDuplicateEmails v-if="duplicateEmailModal.isOpen" :duplicate-invitees="duplicateEmails"
+            @goBackToInvitees="backtoEditInvitees()" @removeDuplicates="removeDuplicateEmails()" />
     </div>
 
 </template>

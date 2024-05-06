@@ -30,6 +30,8 @@ const deleteInvitee = (id) => {
 }
 
 
+
+
 </script>
 
 <template>
