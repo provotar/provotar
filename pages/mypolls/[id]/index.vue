@@ -117,7 +117,6 @@ const endPoll = () => {
 
 
 onMounted(() => {
-
     getPollDets();
 
 })

@@ -5,6 +5,7 @@ export const useVoteStore = defineStore("vote", {
   state: () => ({
     voteSelection: [],
     inviteeId: "",
+    voteTime: "",
   }),
 
   actions: {
@@ -27,10 +28,12 @@ export const useVoteStore = defineStore("vote", {
 
     async updateVotedStatus() {
       const supabase = useSupabaseClient();
+      const voteFullTime = new Date();
+      this.voteTime = voteFullTime.toLocaleString();
       try {
         const { error } = await supabase
           .from("invitees")
-          .update({ hasVoted: true })
+          .update({ hasVoted: true, timeVoted: this.voteTime })
           .eq("id", this.inviteeId);
         if (error) {
           console.log(error);

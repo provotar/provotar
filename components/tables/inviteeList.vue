@@ -41,7 +41,7 @@ defineProps({
                     </td>
 
                     <td>
-                        <p v-if="invitee.voteTime">{{ invitee.voteTime }}</p>
+                        <p v-if="invitee.timeVoted">{{ invitee.timeVoted }}</p>
                         <p v-else>-</p>
                     </td>
                 </tr>
