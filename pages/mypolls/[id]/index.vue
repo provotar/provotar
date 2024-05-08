@@ -74,7 +74,7 @@ const votePercentage = (user_id, position_id) => {
         const userVotes = positionVotes.filter(({ candidate_id }) => candidate_id === user_id).length
         const totalVotes = positionVotes.length;
 
-        return (userVotes / totalVotes) * 100
+        return ((userVotes / totalVotes) * 100).toFixed(1)
     } else {
         return 0
     }
@@ -117,7 +117,6 @@ const endPoll = () => {
 
 
 onMounted(() => {
-
     getPollDets();
 
 })

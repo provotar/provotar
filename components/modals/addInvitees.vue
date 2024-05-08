@@ -5,7 +5,7 @@ const props = defineProps({
     pollId: String,
     savedInvitees: Array,
 })
-const emit = defineEmits(['storeInvitees', 'deleteInvitee'])
+const emit = defineEmits(['closeModal', 'storeInvitees', 'deleteInvitee'])
 const newInviteEmail = ref();
 
 
@@ -28,6 +28,8 @@ const toggleEditMode = (id) => {
 const deleteInvitee = (id) => {
     emit('deleteInvitee', id)
 }
+
+
 
 
 </script>
