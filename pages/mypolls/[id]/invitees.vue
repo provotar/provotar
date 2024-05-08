@@ -18,17 +18,21 @@ const inviteeList = ref([]);
 const inviteeDetails = ref([]);
 
 const loadingInvitees = ref(false);
-const emptyInvites = ref(false)
+const emptyInvites = ref(false);
 
-const duplicateEmails = ref([]);
+const duplicateEmails = ref([]); // duplicate input invitee emails 
+const doubleEmails = ref([]); // double invitee emails that have already been invited
 
 
 // modals
 const newInviteModal = ref({ isOpen: false });
 const duplicateEmailModal = ref({ isOpen: false });
+const doubleEmailModal = ref({ isOpen: false });
 const confirmSaveInvitees = ref({ isOpen: false });
 const voteInviteSent = ref({ isOpen: false });
 
+const savedInvitees = ref([]);
+const existingEmails = ref([]);
 
 
 const getPollDets = async () => {
@@ -42,22 +46,28 @@ const getPollDets = async () => {
         if (data[0].invitees.length > 0) {
             inviteeDetails.value = data;
             inviteeList.value = data[0].invitees
+            // console.log(inviteeList.value);
             loadingInvitees.value = false
 
+            // get all invited emails
+            if (inviteeList.value.length > 0) {
+                existingEmails.value = inviteeList.value.map(invitee => invitee.email)
+                // console.log(invitedEmails.value);
+            }
         } else {
             loadingInvitees.value = false
             emptyInvites.value = true
         }
 
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
     }
+
 };
 
-const savedInvitees = ref([]);
 
-// get duplicate emails
+
+// get duplicate emails and count
 const findDuplicateEmails = () => {
     // email and count object
     const emailCounts = {}
@@ -85,7 +95,8 @@ const findDuplicateEmails = () => {
 
     return duplicateEmailsArray;
 };
-// remove duplicate emails
+
+// remove duplicate input  emails
 const removeDuplicateEmails = () => {
     // new Set to keep track of unique emails
     const emailSet = new Set();
@@ -101,39 +112,59 @@ const removeDuplicateEmails = () => {
     backtoEditInvitees();
 }
 
+// remove already invited emails
+const clearDoubleEmails = () => {
+    savedInvitees.value = savedInvitees.value.filter(invitee => !doubleEmails.value.includes(invitee.invitee_email));
+    backtoEditInvitees();
+}
+
 // deleteInvitee emit
 const deleteInvitee = (id) => {
     savedInvitees.value = savedInvitees.value.filter(invitee => invitee.invitee_id !== id)
 }
 
+
+const backtoEditInvitees = () => {
+    doubleEmails.value = [];
+    $closeModal(duplicateEmailModal.value);
+    $closeModal(doubleEmailModal.value);
+    $closeModal(confirmSaveInvitees.value);
+    $openModal(newInviteModal.value)
+}
+
+
+
 // saved poll to store
 const saveInviteeToStore = () => {
+    // handle duplicate email inputs
     duplicateEmails.value = findDuplicateEmails();
     if (duplicateEmails.value.length > 0) {
         $closeModal(newInviteModal.value);
         $openModal(duplicateEmailModal.value);
-    } else if (savedInvitees.value.length !== 0) {
-        usePolls.inviteeList = savedInvitees.value;
-        $closeModal(newInviteModal.value)
-        $openModal(confirmSaveInvitees.value)
-    }
+    } else
+        if (savedInvitees.value.length !== 0) {
+            // get the emails that have already been invited
+            for (const invitee of savedInvitees.value) {
+                if (existingEmails.value.includes(invitee.invitee_email)) {
+                    doubleEmails.value.push(invitee.invitee_email);
+                }
+            }
+
+
+            if (doubleEmails.value.length > 0) {
+                // show Emails already exist modal
+                $closeModal(newInviteModal.value);
+                $openModal(doubleEmailModal.value);
+            } else {
+                // show invite confirmation
+                usePolls.inviteeList = savedInvitees.value;
+                $closeModal(newInviteModal.value);
+                $openModal(confirmSaveInvitees.value);
+            }
+
+        }
 }
-
-
-
-const backtoEditInvitees = () => {
-    $closeModal(duplicateEmailModal.value);
-    $openModal(newInviteModal.value)
-}
-
-// confirm modal to invitee list modal
-const backToInviteModal = () => {
-    $closeModal(confirmSaveInvitees.value);
-    $openModal(newInviteModal.value);
-}
-
 const saveInviteeToDB = () => {
-    console.log(usePolls.inviteeList);
     usePolls.saveInviteesToDB();
     $closeModal(confirmSaveInvitees.value)
 }
@@ -143,8 +174,11 @@ const saveInviteeToDB = () => {
 onMounted(() => {
     loadingInvitees.value = true;
     getPollDets();
+
 })
 </script>
+
+
 <template>
     <div class="dashView invitees flex-col">
         <NuxtLink :to="`/mypolls/${pollId}`" class="back-button flex-row">
@@ -173,13 +207,16 @@ onMounted(() => {
         <ModalsAddInvitees v-if="newInviteModal.isOpen" @closeModal="$closeModal(newInviteModal)" :pollId="pollId"
             :savedInvitees="savedInvitees" @deleteInvitee="deleteInvitee" @storeInvitees="saveInviteeToStore()" />
 
-        <ModalsConfirmSaveInvitees v-if="confirmSaveInvitees.isOpen" @goBack="backToInviteModal()"
+        <ModalsConfirmSaveInvitees v-if="confirmSaveInvitees.isOpen" @goBack="backtoEditInvitees()"
             @confirmAddInvitees="saveInviteeToDB()" />
 
         <ModalsSuccessVoteInviteSent v-if="voteInviteSent.isOpen" @closeInviteSent="$closeModal(voteInviteSent)" />
 
         <ModalsErrorinfoDuplicateEmails v-if="duplicateEmailModal.isOpen" :duplicate-invitees="duplicateEmails"
             @goBackToInvitees="backtoEditInvitees()" @removeDuplicates="removeDuplicateEmails()" />
+
+        <ModalsErrorinfoEmailAlreadyExist v-if="doubleEmailModal.isOpen" :double-invitees="doubleEmails"
+            @goBackToInvitees="backtoEditInvitees()" @clearDuplicates="clearDoubleEmails()" />
     </div>
 
 </template>
