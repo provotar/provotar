@@ -63,8 +63,7 @@ const startVote = () => {
         }
     } else {
         // not invited
-        console.log('not invited');
-        notInvited.value === true;
+        router.push(`/vote/${voteID.value}/notInvited`)
     }
 
 }
