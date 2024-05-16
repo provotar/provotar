@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-    <button :class="btn_class" @click="$emit('btn_click')" :disabled="isDisabled">
+    <button :class="btn_class" @click="$emit('btn_click')" :disabled="isDisabled" :type="type">
         <slot name="icon"></slot>
         <slot />
     </button>
