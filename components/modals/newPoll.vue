@@ -42,7 +42,7 @@ const isInputFilled = computed(() => {
                         </template>
                     </Inputs>
 
-                    <Buttons v-if="isInputFilled" btn_class="sml_btn pry_purple" type="submit">
+                    <Buttons v-if="isInputFilled" btn_class="sml_btn pry_purple" btn_type="submit">
                         Continue
                     </Buttons>
                     <Buttons v-else btn_class="sml_btn pry_purple_disabled"> Continue

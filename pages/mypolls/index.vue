@@ -1,5 +1,6 @@
 <script setup>
 import { usePollStore } from '~/store/polls';
+import { useUserStore } from '~/store/user';
 const { $openModal, $closeModal } = useNuxtApp();
 const route = useRouter()
 useHead({
@@ -16,6 +17,15 @@ let userPolls = ref([]);
 let noPolls = ref(false);
 let loadingPolls = ref(true);
 
+// userDetails
+const useUser = useUserStore();
+let userDetails = ref();
+
+
+
+watch(() => useUser.details, (newValue, oldValue) => {
+    userDetails.value = newValue[0]
+})
 
 // watch all polls
 watch(() => usePolls.userPolls, (newValue, oldValue) => {
@@ -39,6 +49,7 @@ const savePollName = () => {
 
 onMounted(() => {
     usePolls.getPolls();
+    useUser.getUserSession();
 })
 
 
@@ -48,7 +59,16 @@ onMounted(() => {
     <div class="dashView myPollsView flex-col">
         <div class="topView flex-row">
             <p class="viewHeader">My Polls</p>
-            <Buttons btn_class="sml_btn pry_purple" @btn_click="$openModal(pollNameModal)">Start a poll</Buttons>
+            <div v-if="userDetails">
+                <div v-if="userDetails.isPro || userPolls.length < 4">
+                    <Buttons btn_class="sml_btn pry_purple" @btn_click="$openModal(pollNameModal)">Start a poll
+                    </Buttons>
+                </div>
+                <div v-else>
+                    <Buttons btn_class="sml_btn pry_purple">✨ Upgrade to Pro
+                    </Buttons>
+                </div>
+            </div>
         </div>
         <div class="viewContent flex-col">
             <div class="tutorialCard flex-row">
