@@ -6,7 +6,9 @@
 // components
 @import "component-styles/buttons.scss";
 @import "component-styles/inputs.scss";
-@import "component-styles/nav.scss";
+@import "component-styles/navs/nav.scss";
+@import "component-styles/navs/topnav.scss";
+@import "component-styles/footer/linkfooter.scss";
 @import "component-styles/toasts.scss";
 
 // modals
@@ -42,6 +44,7 @@
 @import "page-styles/dashboard/invitees.scss";
 
 @import "page-styles/external/vote/intro.scss";
+@import "page-styles/external/website/homepage.scss";
 
 // resets
 @import "resets/reset.scss";

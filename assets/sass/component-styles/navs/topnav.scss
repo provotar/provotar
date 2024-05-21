@@ -1,0 +1,32 @@
+@use "../../utils/colours";
+
+.top-navbar {
+  width: 75%;
+  justify-content: space-between;
+  margin: auto;
+  padding-top: 2rem;
+
+  .top-navbar-right,
+  .link-section,
+  .cta-section {
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .top-navbar-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: colours.$grey-60;
+    cursor: pointer;
+  }
+  .top-navbar-link:hover {
+    color: colours.$grey-90;
+  }
+  .purple {
+    color: colours.$purple-40;
+    font-weight: 600;
+  }
+  .purple:hover {
+    color: colours.$purple-40;
+  }
+}
