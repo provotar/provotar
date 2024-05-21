@@ -27,7 +27,7 @@ const login = () => {
                 </div>
                 <Buttons btn_class="lg_btn pry_purple" @btn_click="getStarted()">Get Started for free</Buttons>
             </div>
-            <img class="hero-img" src="/images/edited/hero_img.svg" alt="hero-img">
+            <img loading="eager" class="hero-img" src="/images/edited/hero_img.svg" alt="hero-img">
         </div>
 
         <div class="sub-info flex-col">
