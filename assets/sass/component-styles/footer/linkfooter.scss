@@ -1,0 +1,21 @@
+@use "../../utils/colours";
+
+.link-footer {
+  justify-content: space-between;
+  width: 70%;
+  margin: 4rem auto;
+
+  .link-section {
+    align-items: center;
+    gap: 3rem;
+  }
+  .top-navbar-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: colours.$grey-60;
+    cursor: pointer;
+  }
+  .top-navbar-link:hover {
+    color: colours.$grey-90;
+  }
+}

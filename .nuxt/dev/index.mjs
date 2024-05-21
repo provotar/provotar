@@ -113,6 +113,7 @@ const _inlineRuntimeConfig = {
         "login": "/login",
         "callback": "/confirm",
         "exclude": [
+          "/",
           "/signup",
           "/vote/*"
         ],
