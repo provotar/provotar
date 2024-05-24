@@ -28,6 +28,7 @@ const login = () => {
                 <Buttons btn_class="lg_btn pry_purple" @btn_click="getStarted()">Get Started for free</Buttons>
             </div>
             <img loading="eager" class="hero-img" src="/images/edited/hero_img.svg" alt="hero-img">
+
         </div>
 
         <div class="sub-info flex-col">
@@ -80,7 +81,7 @@ const login = () => {
                             Stress.</p>
                     </div>
                 </div>
-                <img class="feature-img img-one" src="/images/edited/feature_img_one.svg" alt="img-one">
+                <img class="feature-img img-one" loading="lazy" src="/images/edited/feature_img_one.svg" alt="img-one">
             </div>
 
             <div class="feature-card flex-row two">
@@ -97,7 +98,7 @@ const login = () => {
                             Automatically declare winners with one-click.</p>
                     </div>
                 </div>
-                <img class="feature-img img-two" src="/images/edited/feature_img_two.svg" alt="img-two">
+                <img class="feature-img img-two" loading="lazy" src="/images/edited/feature_img_two.svg" alt="img-two">
 
             </div>
 
@@ -114,7 +115,8 @@ const login = () => {
                             void votes. Receive email verification of votes cast. </p>
                     </div>
                 </div>
-                <img class="feature-img img-three" src="/images/edited/feature_img_three.svg" alt="img-three">
+                <img class="feature-img img-three" loading="lazy" src="/images/edited/feature_img_three.svg"
+                    alt="img-three">
             </div>
         </div>
 

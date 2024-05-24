@@ -11,10 +11,15 @@
   width: 30%;
   align-items: center;
   position: relative;
+  max-width: 35rem;
 
   padding-top: 8rem;
   gap: 2rem;
   // border: 1px solid black;
+  .auth-logo {
+    width: 4rem;
+    cursor: pointer;
+  }
 
   .top_section {
     gap: 2rem;
