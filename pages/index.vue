@@ -21,13 +21,24 @@ const login = () => {
         <div class="hero-section flex-col">
             <div class="hero-content-wrapper flex-col">
                 <div class="hero-text-wrapper flex-col">
-                    <h1 class="hero-copy">Create dynamic polls in minutes</h1>
-                    <p class="hero-subcopy">Securely host elections, bulk invite participants to vote and track insights
+                    <h1 class="hero-copy" v-motion :initial="{ opacity: 0, y: 50 }"
+                        :enter="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }">Create dynamic
+                        polls in
+                        minutes</h1>
+                    <p class="hero-subcopy" v-motion :initial="{ opacity: 0, y: 50 }"
+                        :enter="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="60">
+                        Securely host elections, bulk
+                        invite participants to vote and track insights
                         and analytics </p>
                 </div>
-                <Buttons btn_class="lg_btn pry_purple" @btn_click="getStarted()">Get Started for free</Buttons>
+                <Buttons btn_class="lg_btn pry_purple" @btn_click="getStarted()" v-motion
+                    :initial="{ opacity: 0, y: 50 }"
+                    :enter="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="80">Get
+                    Started for free</Buttons>
             </div>
-            <img loading="eager" class="hero-img" src="/images/edited/hero_img.svg" alt="hero-img">
+            <img loading="eager" class="hero-img" src="/images/edited/hero_img.svg" alt="hero-img" v-motion
+                :initial="{ opacity: 0, y: 50 }"
+                :enter="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="500">
 
         </div>
 

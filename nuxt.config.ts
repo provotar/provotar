@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["nuxt-phosphor-icons", "@nuxtjs/supabase", "@pinia/nuxt"],
+  modules: [
+    "nuxt-phosphor-icons",
+    "@nuxtjs/supabase",
+    "@pinia/nuxt",
+    "@vueuse/motion/nuxt",
+  ],
 
   css: ["~/assets/sass/main.scss"],
   app: {

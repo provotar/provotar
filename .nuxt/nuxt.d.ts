@@ -2,6 +2,7 @@
 /// <reference types="nuxt-phosphor-icons" />
 /// <reference types="@nuxtjs/supabase" />
 /// <reference types="@pinia/nuxt" />
+/// <reference types="@vueuse/motion" />
 /// <reference types="@nuxt/devtools" />
 /// <reference types="@nuxt/telemetry" />
 /// <reference types="nuxt" />

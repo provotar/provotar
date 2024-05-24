@@ -104,6 +104,7 @@
     "../node_modules/nuxt-phosphor-icons/runtime/server",
     "../node_modules/@nuxtjs/supabase/runtime/server",
     "../node_modules/@pinia/nuxt/runtime/server",
+    "../../../../D/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
     "./types/nitro.d.ts",

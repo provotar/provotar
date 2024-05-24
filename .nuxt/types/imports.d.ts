@@ -75,6 +75,8 @@ declare global {
   const provide: typeof import('../../node_modules/vue')['provide']
   const proxyRefs: typeof import('../../node_modules/vue')['proxyRefs']
   const reactive: typeof import('../../node_modules/vue')['reactive']
+  const reactiveStyle: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveStyle']
+  const reactiveTransform: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveTransform']
   const readonly: typeof import('../../node_modules/vue')['readonly']
   const ref: typeof import('../../node_modules/vue')['ref']
   const refreshCookie: typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']
@@ -104,6 +106,8 @@ declare global {
   const useCookie: typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']
   const useCssModule: typeof import('../../node_modules/vue')['useCssModule']
   const useCssVars: typeof import('../../node_modules/vue')['useCssVars']
+  const useElementStyle: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementStyle']
+  const useElementTransform: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementTransform']
   const useError: typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']
   const useFetch: typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']
   const useHead: typeof import('../../node_modules/@unhead/vue')['useHead']
@@ -115,11 +119,18 @@ declare global {
   const useLink: typeof import('../vue-router-stub')['useLink']
   const useLoadingIndicator: typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator')['useLoadingIndicator']
   const useModel: typeof import('../../node_modules/vue')['useModel']
+  const useMotion: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotion']
+  const useMotionControls: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionControls']
+  const useMotionProperties: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionProperties']
+  const useMotionTransitions: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionTransitions']
+  const useMotionVariants: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionVariants']
+  const useMotions: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotions']
   const useNuxtApp: typeof import('../../node_modules/nuxt/dist/app/nuxt')['useNuxtApp']
   const useNuxtData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']
   const useNuxtDevTools: typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']
   const usePinia: typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']
   const usePreviewMode: typeof import('../../node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']
+  const useReducedMotion: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useReducedMotion']
   const useRequestEvent: typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']
   const useRequestFetch: typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestFetch']
   const useRequestHeader: typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestHeader']
@@ -133,6 +144,7 @@ declare global {
   const useServerHeadSafe: typeof import('../../node_modules/@unhead/vue')['useServerHeadSafe']
   const useServerSeoMeta: typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']
   const useSlots: typeof import('../../node_modules/vue')['useSlots']
+  const useSpring: typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useSpring']
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']
   const useSupabaseClient: typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseClient')['useSupabaseClient']
   const useSupabaseSession: typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseSession')['useSupabaseSession']
@@ -233,6 +245,8 @@ declare module 'vue' {
     readonly provide: UnwrapRef<typeof import('../../node_modules/vue')['provide']>
     readonly proxyRefs: UnwrapRef<typeof import('../../node_modules/vue')['proxyRefs']>
     readonly reactive: UnwrapRef<typeof import('../../node_modules/vue')['reactive']>
+    readonly reactiveStyle: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveStyle']>
+    readonly reactiveTransform: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveTransform']>
     readonly readonly: UnwrapRef<typeof import('../../node_modules/vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('../../node_modules/vue')['ref']>
     readonly refreshCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']>
@@ -262,6 +276,8 @@ declare module 'vue' {
     readonly useCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']>
     readonly useCssModule: UnwrapRef<typeof import('../../node_modules/vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('../../node_modules/vue')['useCssVars']>
+    readonly useElementStyle: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementStyle']>
+    readonly useElementTransform: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementTransform']>
     readonly useError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']>
     readonly useFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']>
     readonly useHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHead']>
@@ -273,11 +289,18 @@ declare module 'vue' {
     readonly useLink: UnwrapRef<typeof import('../vue-router-stub')['useLink']>
     readonly useLoadingIndicator: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator')['useLoadingIndicator']>
     readonly useModel: UnwrapRef<typeof import('../../node_modules/vue')['useModel']>
+    readonly useMotion: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotion']>
+    readonly useMotionControls: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionControls']>
+    readonly useMotionProperties: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionProperties']>
+    readonly useMotionTransitions: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionTransitions']>
+    readonly useMotionVariants: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionVariants']>
+    readonly useMotions: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotions']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']>
     readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
     readonly usePreviewMode: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']>
+    readonly useReducedMotion: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useReducedMotion']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']>
     readonly useRequestFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestFetch']>
     readonly useRequestHeader: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestHeader']>
@@ -291,6 +314,7 @@ declare module 'vue' {
     readonly useServerHeadSafe: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerHeadSafe']>
     readonly useServerSeoMeta: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']>
     readonly useSlots: UnwrapRef<typeof import('../../node_modules/vue')['useSlots']>
+    readonly useSpring: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useSpring']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
     readonly useSupabaseClient: UnwrapRef<typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseClient')['useSupabaseClient']>
     readonly useSupabaseSession: UnwrapRef<typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseSession')['useSupabaseSession']>
@@ -384,6 +408,8 @@ declare module '@vue/runtime-core' {
     readonly provide: UnwrapRef<typeof import('../../node_modules/vue')['provide']>
     readonly proxyRefs: UnwrapRef<typeof import('../../node_modules/vue')['proxyRefs']>
     readonly reactive: UnwrapRef<typeof import('../../node_modules/vue')['reactive']>
+    readonly reactiveStyle: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveStyle']>
+    readonly reactiveTransform: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['reactiveTransform']>
     readonly readonly: UnwrapRef<typeof import('../../node_modules/vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('../../node_modules/vue')['ref']>
     readonly refreshCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['refreshCookie']>
@@ -413,6 +439,8 @@ declare module '@vue/runtime-core' {
     readonly useCookie: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/cookie')['useCookie']>
     readonly useCssModule: UnwrapRef<typeof import('../../node_modules/vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('../../node_modules/vue')['useCssVars']>
+    readonly useElementStyle: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementStyle']>
+    readonly useElementTransform: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useElementTransform']>
     readonly useError: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/error')['useError']>
     readonly useFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/fetch')['useFetch']>
     readonly useHead: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useHead']>
@@ -424,11 +452,18 @@ declare module '@vue/runtime-core' {
     readonly useLink: UnwrapRef<typeof import('../vue-router-stub')['useLink']>
     readonly useLoadingIndicator: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/loading-indicator')['useLoadingIndicator']>
     readonly useModel: UnwrapRef<typeof import('../../node_modules/vue')['useModel']>
+    readonly useMotion: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotion']>
+    readonly useMotionControls: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionControls']>
+    readonly useMotionProperties: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionProperties']>
+    readonly useMotionTransitions: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionTransitions']>
+    readonly useMotionVariants: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotionVariants']>
+    readonly useMotions: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useMotions']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']>
     readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
     readonly usePreviewMode: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']>
+    readonly useReducedMotion: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useReducedMotion']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']>
     readonly useRequestFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestFetch']>
     readonly useRequestHeader: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestHeader']>
@@ -442,6 +477,7 @@ declare module '@vue/runtime-core' {
     readonly useServerHeadSafe: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerHeadSafe']>
     readonly useServerSeoMeta: UnwrapRef<typeof import('../../node_modules/@unhead/vue')['useServerSeoMeta']>
     readonly useSlots: UnwrapRef<typeof import('../../node_modules/vue')['useSlots']>
+    readonly useSpring: UnwrapRef<typeof import('../../node_modules/@vueuse/motion/dist/runtime/composables/index')['useSpring']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
     readonly useSupabaseClient: UnwrapRef<typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseClient')['useSupabaseClient']>
     readonly useSupabaseSession: UnwrapRef<typeof import('../../node_modules/@nuxtjs/supabase/dist/runtime/composables/useSupabaseSession')['useSupabaseSession']>
