@@ -21,6 +21,7 @@
           width: 70%;
           text-align: center;
           color: colours.$grey-90;
+          opacity: 0;
         }
         .hero-subcopy {
           font-size: 1rem;
@@ -29,11 +30,16 @@
           line-height: 145%;
           text-align: center;
           width: 45%;
+          opacity: 0;
         }
+      }
+      button {
+        opacity: 0;
       }
     }
     .hero-img {
       margin-top: -15rem;
+      opacity: 0;
     }
   }
 
