@@ -63,9 +63,11 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
 
 </script>
 
-<template >
+<template>
     <div class="auth_wrapper flex-col">
-        <img src="/images/icons/logo_purple.svg" alt="logo_purple">
+        <nuxt-link to="/">
+            <img class="auth-logo" src="/images/icons/logo_purple.svg" alt="logo_purple">
+        </nuxt-link>
         <div class="top_section flex-col">
             <div class="header_wrapper flex-col">
                 <p class="auth_header">Create an account</p>
