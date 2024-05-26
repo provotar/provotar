@@ -47,6 +47,7 @@
   .sub-info {
     gap: 8rem;
     align-items: center;
+
     // margin-top: 5rem;
     .sub-info-title {
       font-size: 3rem;
@@ -56,6 +57,7 @@
       color: colours.$grey-90;
       text-align: center;
       width: 30%;
+      opacity: 0;
     }
     .sub-info-rack {
       width: 75%;

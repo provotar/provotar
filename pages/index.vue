@@ -21,8 +21,11 @@ const login = () => {
         <div class="hero-section flex-col">
             <div class="hero-content-wrapper flex-col">
                 <div class="hero-text-wrapper flex-col">
-                    <h1 class="hero-copy" v-motion :initial="{ opacity: 0, y: 50 }"
-                        :enter="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }">Create dynamic
+                    <h1 class="hero-copy" v-motion :initial="{ opacity: 0, y: 50 }" :enter="{
+                        opacity: 1, y: 0,
+                        transition:
+                            { duration: 1000, ease: 'easeOut' }
+                    }">Create dynamic
                         polls in
                         minutes</h1>
                     <p class="hero-subcopy" v-motion :initial="{ opacity: 0, y: 50 }"
@@ -43,30 +46,37 @@ const login = () => {
         </div>
 
         <div class="sub-info flex-col">
-            <p class="sub-info-title">Fully-customised poll, anywhere, anytime.</p>
+
+            <p class="sub-info-title" v-motion :initial="{ opacity: 0, y: 50 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="100">
+                Fully-customised poll, anywhere, anytime.</p>
             <div class="sub-info-rack flex-row">
-                <div class="rack-item flex-col">
+                <div class="rack-item flex-col" v-motion :initial="{ opacity: 0, x: 50 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="500">
                     <img class="rack-img" src="/images/icons/activity.svg" alt="rack-img">
                     <div class="rack-text flex-col">
                         <p class="rack-title">Realtime updates</p>
                         <p class="rack-subtitle">Track live polls and metrics as they come in.</p>
                     </div>
                 </div>
-                <div class="rack-item flex-col">
+                <div class="rack-item flex-col" v-motion :initial="{ opacity: 0, x: 50 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="600">
                     <img class="rack-img" src="/images/icons/lock.svg" alt="rack-img">
                     <div class="rack-text flex-col">
                         <p class="rack-title">Air-tight security</p>
                         <p class="rack-subtitle">Rig-proof voting process with fortified security measures.</p>
                     </div>
                 </div>
-                <div class="rack-item flex-col">
+                <div class="rack-item flex-col" v-motion :initial="{ opacity: 0, x: 50 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="700">
                     <img class="rack-img" src="/images/icons/eye.svg" alt="rack-img">
                     <div class="rack-text flex-col">
                         <p class="rack-title">True transparency</p>
                         <p class="rack-subtitle">All results available with in-depth detail and visibility</p>
                     </div>
                 </div>
-                <div class="rack-item flex-col">
+                <div class="rack-item flex-col" v-motion :initial="{ opacity: 0, x: 50 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 1000, ease: 'easeOut' } }" :delay="800">
                     <img class="rack-img" src="/images/icons/database.svg" alt="rack-img">
                     <div class="rack-text flex-col">
                         <p class="rack-title">Backed up storage</p>
