@@ -39,8 +39,15 @@ const editPosition = (id) => {
 // delete position
 const deletePosition = (id) => {
     positionList.value = positionList.value.filter(posList => posList.pos_id !== id);
-    console.log(positionList.value);
 }
+// clear position editing after clicking x when input is empty
+const editedPositionId = ref('') // initialize id from editPosition.vue
+const clearPosition = (id) => {
+    editedPositionId.value = id;
+    deletePosition(editedPositionId.value);
+    $closeModal(editPositionModal.value);
+}
+
 
 
 // save position to pinia store
@@ -77,6 +84,8 @@ const copyLink = async () => {
 }
 
 
+
+
 </script>
 
 <template>
@@ -89,7 +98,12 @@ const copyLink = async () => {
             <img src="/images/icons/big_flag.svg" alt="big_flag">
             <div class="topView flex-row">
                 <p class="poll-title">{{ usePolls.newPoll.pollTitle }}</p>
-                <Buttons btn_class="sml_btn pry_purple" @btn_click="savePositionDetails()">Save Poll</Buttons>
+                <div>
+                    <Buttons v-if="positionList.length" btn_class="sml_btn pry_purple"
+                        @btn_click="savePositionDetails()">Save Poll</Buttons>
+                    <Buttons v-else btn_class="sml_btn pry_purple_disabled">Save Poll</Buttons>
+
+                </div>
 
             </div>
 
@@ -150,8 +164,8 @@ const copyLink = async () => {
     </div>
 
 
-    <ModalsEditPosition v-show="editPositionModal.isOpen" :positionDetails=positionToEdit
-        @closeModal="$closeModal(editPositionModal)">
+    <ModalsEditPosition v-show="editPositionModal.isOpen" :positionDetails="positionToEdit"
+        @clear-position="clearPosition" @closeModal="$closeModal(editPositionModal)">
     </ModalsEditPosition>
     <ModalsConfirmPollCreation v-show="confirmPollCreationModal.isOpen"
         @closeModal="$closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()">

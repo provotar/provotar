@@ -63,9 +63,11 @@
       width: 75%;
       justify-content: space-between;
       max-width: 90rem;
+
       .rack-item {
         align-items: center;
         gap: 2rem;
+        opacity: 0;
         .rack-text {
           align-items: center;
           gap: 0.75rem;
