@@ -1,5 +1,5 @@
 
-![Provotar](https://provotar.vercel.app/images/icons/big_logo_purple.svg)
+![Provotar](https://provotar.com/images/icons/big_logo_purple.svg)
 
 # Provotar
 
@@ -12,7 +12,7 @@ Provotar is an open-source project that leverages Nuxt.js and Supabase to revolu
 - **AI-Powered Analysis**: Utilize advanced AI algorithms to analyze election data, identify trends, and make informed decisions.
 
 ## Figma Design
-![FigmaImage](https://provotar.vercel.app/images/screens/Home.png)
+![FigmaImage](https://provotar.com/images/screens/Home.png)
 View the Figma design file for Election AI: [Provotar Figma](https://www.figma.com/file/eHPle9xPJLlHrLEyEN1b54/Web?type=design&node-id=38%3A9880&mode=design&t=hInc5LSdTew48HWs-1)
 
 ## Getting Started
