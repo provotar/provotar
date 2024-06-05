@@ -4,8 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 const props = defineProps({
     positionDetails: Object,
 })
-defineEmits(['closeModal'])
-// const positionDetails = ref([]);
+
+
+const emit = defineEmits(['clearPosition', 'closeModal'])
+
+const clearPositionDets = () => {
+    emit('clearPosition', props.positionDetails.pos_id)
+}
+
+
+
 
 const addCandidate = () => {
     props.positionDetails.candidates.push({
@@ -24,6 +32,15 @@ const deleteCandidate = (id) => {
     props.positionDetails.candidates = props.positionDetails.candidates.filter(candidate => candidate.candidate_id !== id)
 }
 
+// const emptyDetails = ref(true);
+// if (props.positionDetails.positionName !== '' && props.positionDetails.candidates) {
+//     emptyDetails.value = false;
+//     console.log(props.positionDetails);
+// } else {
+//     emptyDetails.value === true;
+// }
+
+
 
 </script>
 
@@ -33,12 +50,14 @@ const deleteCandidate = (id) => {
             <p class="modal_title">Edit Position</p>
         </template>
         <template #modal_icon>
-            <PhosphorIconX :size="24" weight="bold" @click="$emit('closeModal')" />
+
+            <PhosphorIconX :size="24" weight="bold" @click="clearPositionDets"
+                v-if="positionDetails.positionName === ''" />
+
         </template>
         <template #modal_content>
             <div class="scroll-modal-content flex-col">
-                <Inputs type="text" placeholder="e.g President" v-model.trim="positionDetails.positionName"
-                    :minlength="'5'">
+                <Inputs type="text" placeholder="e.g President" v-model.trim="positionDetails.positionName">
                     <template #label>
                         Position Name
                     </template>
@@ -111,7 +130,14 @@ const deleteCandidate = (id) => {
                 </div>
             </div>
             <div class="modal-footer-actions flex-row">
-                <Buttons @click="$emit('closeModal')" btn_class="sml_btn pry_purple">Save changes</Buttons>
+
+                <Buttons v-if="positionDetails.positionName !== '' && positionDetails.candidates"
+                    @click="$emit('closeModal')" btn_class="sml_btn pry_purple">Save
+                    changes</Buttons>
+
+                <Buttons v-else btn_class="sml_btn pry_purple_disabled">Save changes
+                </Buttons>
+
             </div>
         </template>
 
