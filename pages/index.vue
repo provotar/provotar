@@ -1,4 +1,5 @@
 <script setup>
+
 const route = useRouter();
 
 useHead({
@@ -12,11 +13,25 @@ const login = () => {
     route.push("/signup")
 }
 
+const hamMenu = ref(false)
+const toggleHamMenu = () => {
+    if (!hamMenu.value) {
+        hamMenu.value = true
+    } else {
+        hamMenu.value = false
+    }
+}
+const closeHamMenu = () => {
+    hamMenu.value = false;
+}
+
 </script>
 
 <template>
     <div class="home-page">
-        <NavTopnav @get-started="getStarted()" />
+        <NavHammenu v-if="hamMenu" @tgl-ham-menu="toggleHamMenu()" />
+        <NavTopnav @get-started="getStarted()" @tgl-ham-menu="toggleHamMenu()" @closeHamMenu="">
+        </NavTopnav>
 
         <div class="hero-section flex-col">
             <div class="hero-content-wrapper flex-col">
