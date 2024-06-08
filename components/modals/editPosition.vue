@@ -32,13 +32,6 @@ const deleteCandidate = (id) => {
     props.positionDetails.candidates = props.positionDetails.candidates.filter(candidate => candidate.candidate_id !== id)
 }
 
-// const emptyDetails = ref(true);
-// if (props.positionDetails.positionName !== '' && props.positionDetails.candidates) {
-//     emptyDetails.value = false;
-//     console.log(props.positionDetails);
-// } else {
-//     emptyDetails.value === true;
-// }
 
 
 
