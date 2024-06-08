@@ -1,0 +1,47 @@
+@use "../../utils/colours";
+
+// ham menu
+.ham-menu {
+  position: absolute;
+  background-color: colours.$purple-40;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto;
+  width: 100%;
+  height: 60vh;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  padding-bottom: 3rem;
+  // border: 1px solid red;
+  .link-wrapper {
+    justify-content: space-between;
+    margin-left: 2rem;
+    height: 90%;
+    margin-top: 3rem;
+    .ham-link-wrapper {
+      gap: 1.5rem;
+
+      .ham-link {
+        font-size: 1.7rem;
+        font-weight: 500;
+
+        color: #fefefe;
+      }
+    }
+    .cta-section {
+      gap: 2rem;
+      .ham-link-white {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fefefe;
+      }
+    }
+  }
+  .closeIcon {
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+}

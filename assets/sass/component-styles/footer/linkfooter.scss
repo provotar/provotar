@@ -20,3 +20,37 @@
     color: colours.$grey-90;
   }
 }
+
+@media (min-width: 320px) {
+  .link-footer {
+    width: 90%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    .link-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 2rem;
+      width: 90%;
+    }
+  }
+}
+@media (min-width: 1024px) {
+  .link-footer {
+    width: 80%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    .link-section {
+      display: flex;
+      width: max-content;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .link-footer {
+    width: 70%;
+  }
+}
