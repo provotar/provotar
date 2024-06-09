@@ -87,7 +87,8 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
             <div class="form_wrapper flex-col">
                 <div class="form_dets flex-col">
 
-                    <Inputs placeholder="e.g Jon Bellion" type="text" v-model="fullname" :isRequired=true>
+                    <Inputs placeholder="e.g Jon Bellion" type="text" v-model="fullname" :isRequired=true
+                        :minLength="5">
                         <template #label>
                             Full Name
                         </template>
@@ -95,7 +96,7 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
                             <PhosphorIconUserCircle :size="24" />
                         </template>
                     </Inputs>
-                    <Inputs placeholder="you@email.com" type="Email" v-model="newEmail" :isRequired=true>
+                    <Inputs placeholder="you@email.com" type="Email" v-model="newEmail" :isRequired=true :minLength="5">
                         <template #label>
                             Email Address
                         </template>
@@ -105,7 +106,7 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
                     </Inputs>
 
                     <Inputs placeholder="*******" :type="!passwordShown ? 'password' : 'text'" v-model="newPassword"
-                        :isRequired=true>
+                        :isRequired=true :minLength="8">
                         <template #label>
                             Password
                         </template>
