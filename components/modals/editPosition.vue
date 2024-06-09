@@ -50,7 +50,8 @@ const deleteCandidate = (id) => {
         </template>
         <template #modal_content>
             <div class="scroll-modal-content flex-col">
-                <Inputs type="text" placeholder="e.g President" v-model.trim="positionDetails.positionName">
+                <Inputs type="text" placeholder="e.g President" v-model.trim="positionDetails.positionName"
+                    :minLength="5">
                     <template #label>
                         Position Name
                     </template>
@@ -77,13 +78,14 @@ const deleteCandidate = (id) => {
 
                             <div v-else class="candidate-form flex-col">
                                 <div class="form-inputs flex-row">
-                                    <Inputs type="text" placeholder="e.g Jon Bellion"
-                                        v-model.trim="candidates.fullName">
+                                    <Inputs type="text" placeholder="e.g Jon Bellion" v-model.trim="candidates.fullName"
+                                        :minLength="5">
                                         <template #label>
                                             Full Name
                                         </template>
                                     </Inputs>
-                                    <Inputs type="text" placeholder="Belie" v-model.trim="candidates.campaignName">
+                                    <Inputs type="text" placeholder="Belie" v-model.trim="candidates.campaignName"
+                                        :minLength="5">
                                         <template #label>
                                             Campaign Name
                                         </template>

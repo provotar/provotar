@@ -1,15 +1,25 @@
 <script setup>
-defineProps({
+const props = defineProps({
     placeholder: String,
-    type: String,
+
+    minLength: {
+        type: Number,
+        default: 0
+    },
+    type: {
+        type: String,
+        default: 'text',
+    },
     isRequired: {
         type: Boolean,
         default: false,
     },
-    min: String,
-    minlength: String,
+
 });
+
+
 const model = defineModel()
+
 </script>
 
 <template>
@@ -18,12 +28,13 @@ const model = defineModel()
             <slot name="label"></slot>
         </p>
         <div class="input-container flex-row">
-            <input :placeholder="placeholder" :type="type" v-model="model" :min="min" :minlength="minlength"
-                :required="isRequired">
+            <input :placeholder="placeholder" :type="type" v-model="model" :required="isRequired"
+                :minlength="minLength">
 
             <slot name="icon"></slot>
         </div>
         <slot name="helper_text"></slot>
+
 
     </div>
 </template>
