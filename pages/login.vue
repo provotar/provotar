@@ -87,7 +87,7 @@ watch(() => userStore.loading, (newValue, oldValue) => {
             <div class="form_wrapper flex-col">
                 <div class="form_dets flex-col">
 
-                    <Inputs placeholder="you@email.com" type="Email" v-model="email" :isRequired=true>
+                    <Inputs placeholder="you@email.com" type="Email" v-model="email" :minLength="5" :isRequired=true>
                         <template #label>
                             Email Address
                         </template>
@@ -97,7 +97,7 @@ watch(() => userStore.loading, (newValue, oldValue) => {
                     </Inputs>
 
                     <Inputs placeholder="*******" :type="!passwordShown ? 'password' : 'text'" v-model="password"
-                        :isRequired=true>
+                        :minLength="5" :isRequired=true>
                         <template #label>
                             Password
                         </template>

@@ -18,7 +18,7 @@ const savePollName = () => {
 };
 
 const isInputFilled = computed(() => {
-    return newPollName.value.trim() !== '';
+    return newPollName.value.trim().length >= 5;
 })
 
 </script>
@@ -35,7 +35,8 @@ const isInputFilled = computed(() => {
                 <form class="new-poll-form flex-col" @submit.prevent="savePollName">
                     <p class="modal_title">What is the name of your poll?</p>
 
-                    <Inputs type="text" placeholder="e.g Pop Council Election" v-model.trim="newPollName">
+                    <Inputs type="text" placeholder="e.g Pop Council Election" v-model.trim="newPollName"
+                        :minLength="5">
                         <template #helper_text required>
                             <p class="helper_text">At least 5 characters</p>
                         </template>
