@@ -1,1 +1,1 @@
-export { default } from "file:///Users/cowrywise/Desktop/provotar/provotar/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
+export { default } from "file:///Users/cowrywise/Desktop/provotar/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"
