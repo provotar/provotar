@@ -2,12 +2,17 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
+    //login/signup
     session: null,
     details: null,
     loggedIn: false,
     authError: false,
     errorMessage: false,
     loading: false,
+
+    // password reset
+    NoExistingEmail: false,
+    loadingReset: false,
   }),
   actions: {
     // get user session
@@ -48,6 +53,7 @@ export const useUserStore = defineStore("user", {
       }
     },
 
+    // create user
     async createUserViaEmail(newEmail, newPassword, fullName) {
       this.loading = true;
       const supabase = useSupabaseClient();
@@ -55,12 +61,14 @@ export const useUserStore = defineStore("user", {
 
       try {
         const { data: newUser, error } = await supabase.auth.signUp({
-          email: newEmail,
-          password: newPassword,
+          email: `${newEmail}`,
+          password: `${newPassword}`,
         });
+
         if (newUser.session) {
           this.errorMessage = false;
           const { error } = await supabase.from("userList").insert({
+            user_email: newEmail,
             full_name: fullName,
             userId: newUser.user.id,
           });
@@ -101,5 +109,52 @@ export const useUserStore = defineStore("user", {
         this.loading = false;
       }
     },
+
+    // request reset password
+    // async requestResetPassword(email) {
+    //   this.NoExistingEmail = false;
+    //   this.loadingReset = true;
+    //   const supabase = useSupabaseClient();
+    //   const route = useRouter();
+
+    //   try {
+    //     const { data, error } = await supabase
+    //       .from("userList")
+    //       .select("user_email")
+    //       .eq("user_email", `${email}`);
+    //     if (data.length === 0) {
+    //       console.log("user does not exist");
+    //       this.NoExistingEmail = true;
+    //       this.loadingReset = false;
+    //     } else {
+    //       console.log("Reset email sent");
+    //       this.NoExistingEmail = false;
+    //       try {
+    //         const { error } = await supabase.auth.resetPasswordForEmail(
+    //           `${email}`
+    //         );
+    //         if (error) {
+    //           console.log(console.log(error.message));
+    //         }
+    //       } catch (err) {
+    //         console.log(error);
+    //       }
+    //       this.loadingReset = false;
+    //       route.push(`/auth/reset_password/${email}/`);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    //   // try {
+    //   //   const { error } = await supabase.auth.resetPasswordForEmail(
+    //   //     `${email}`,
+    //   //     {
+    //   //       redirectTo: "http://localhost:3000/auth/reset_password",
+    //   //     }
+    //   //   );
+    //   // } catch (err) {
+    //   //   console.log(err);
+    //   // }
+    // },
   },
 });

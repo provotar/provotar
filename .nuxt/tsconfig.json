@@ -128,7 +128,7 @@
     "../node_modules/nuxt-phosphor-icons/runtime",
     "../node_modules/@nuxtjs/supabase/runtime",
     "../node_modules/@pinia/nuxt/runtime",
-    "../../../../D/runtime",
+    "../../../D/runtime",
     "../node_modules/@nuxt/devtools/runtime",
     "../node_modules/@nuxt/telemetry/runtime",
     ".."
@@ -139,7 +139,7 @@
     "../node_modules/nuxt-phosphor-icons/runtime/server",
     "../node_modules/@nuxtjs/supabase/runtime/server",
     "../node_modules/@pinia/nuxt/runtime/server",
-    "../../../../D/runtime/server",
+    "../../../D/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
     "../dist",

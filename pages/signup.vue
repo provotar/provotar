@@ -73,15 +73,15 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
                 <p class="auth_header">Create an account</p>
                 <p class="sub_heading">Join to start using Provotar for free.</p>
             </div>
-            <a class="google_link flex-row">
+            <!-- <a class="google_link flex-row">
                 <img src="/images/icons/google.svg" alt="google_logo">
                 <p>Continue with Google</p>
-            </a>
+            </a> -->
         </div>
-        <div class="divider flex-row">
+        <!-- <div class="divider flex-row">
 
             <p>or</p>
-        </div>
+        </div> -->
 
         <form @submit.prevent="createNewUserViaEmail" id="signup_form" class="auth_form flex-col">
             <div class="form_wrapper flex-col">
