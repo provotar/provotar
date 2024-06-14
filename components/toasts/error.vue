@@ -1,7 +1,9 @@
 <template>
     <div class="errortoast flex-row">
         <slot name="toastMessage"></slot>
-        <slot name="icon"></slot>
+        <div class="icon flex-row">
+            <slot name="icon"></slot>
+        </div>
 
     </div>
 </template>

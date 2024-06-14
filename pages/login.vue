@@ -73,15 +73,15 @@ watch(() => userStore.loading, (newValue, oldValue) => {
                 <p class="auth_header">Welcome Back</p>
                 <p class="sub_heading">Enter your details to access your account</p>
             </div>
-            <a class="google_link flex-row">
+            <!-- <a class="google_link flex-row">
                 <img src="/images/icons/google.svg" alt="google_logo">
                 <p>Continue with Google</p>
-            </a>
+            </a> -->
         </div>
-        <div class="divider flex-row">
+        <!-- <div class="divider flex-row">
 
             <p>or</p>
-        </div>
+        </div> -->
 
         <form @submit.prevent="signInAdmin" id="login_form" class="auth_form flex-col">
             <div class="form_wrapper flex-col">
@@ -110,7 +110,7 @@ watch(() => userStore.loading, (newValue, oldValue) => {
 
 
                 </div>
-                <a>Forgot Password</a>
+
 
             </div>
 

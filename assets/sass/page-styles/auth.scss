@@ -5,6 +5,13 @@
   @include h2($bold);
   color: colours.$grey-90;
 }
+.inner_cta_links {
+  width: 100%;
+}
+.request_newpassword {
+  width: 100%;
+  text-align: center;
+}
 
 .auth_wrapper {
   margin: 0 auto;
@@ -132,6 +139,7 @@
     .top_section {
       width: 90%;
     }
+
     .auth_form {
       width: 100%;
     }
@@ -147,6 +155,9 @@
     .top_section {
       width: 80%;
     }
+    .google_link {
+      width: 75%;
+    }
     .auth_form {
       width: 90%;
     }
@@ -160,7 +171,10 @@
     gap: 2rem;
 
     .top_section {
-      width: 65%;
+      width: 100%;
+    }
+    .google_link {
+      width: 68%;
     }
     .auth_form {
       width: 75%;
