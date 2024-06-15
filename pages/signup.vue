@@ -12,6 +12,12 @@ const newPassword = ref();
 const invalidEmail = ref(false);
 const weakPassword = ref(false);
 
+
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const validEmailInput = computed(() => emailRegex.test(newEmail.value))
+const validFormInput = ref(false)
+
+
 let errorMessage = ref(false)
 let loadingCTA = ref(false)
 
@@ -28,8 +34,8 @@ const togglePasswordShown = () => {
 
 // createUserViaEmail
 const createNewUserViaEmail = () => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     if (newEmail.value !== "" && emailRegex.test(newEmail.value) && newPassword.value.length >= 6) {
+        validFormInput.value = true;
         userStore.createUserViaEmail(newEmail.value, newPassword.value, fullname.value);
         invalidEmail.value = false;
         weakPassword.value = false;
@@ -122,7 +128,6 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
 
                     </Inputs>
 
-
                 </div>
 
 
@@ -130,9 +135,15 @@ watch(() => userStore.errorMessage, (newValue, oldValue) => {
             </div>
 
             <div class="cta_links flex-col">
-                <Buttons btn_class="lg_btn pry_purple" type="submit" v-if="!loadingCTA">Create an account</Buttons>
 
-                <Buttons btn_class="lg_btn pry_purple_loading" type="submit" v-else>
+                <div v-if="!loadingCTA" class="inner_cta_links flex-col">
+                    <Buttons btn_class="lg_btn pry_purple" type="submit" v-if="validEmailInput">Create
+                        an account
+                    </Buttons>
+                    <Buttons btn_class="lg_btn pry_purple_disabled" v-else>Create an account</Buttons>
+
+                </div>
+                <Buttons btn_class="lg_btn pry_purple_loading" v-else>
                     <template #icon>
                         <PhosphorIconSpinner :size="20" weight="bold" />
                     </template>
