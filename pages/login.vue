@@ -9,7 +9,9 @@ const userStore = useUserStore();
 const email = ref();
 const password = ref();
 const invalidEmail = ref(false);
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
+const validEmailInput = computed(() => emailRegex.test(email.value))
 
 // toggle password
 const passwordShown = ref(false);
@@ -30,7 +32,7 @@ const signInUser = userStore.signInUser;
 
 
 const signInAdmin = () => {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
     if (email.value === "" || emailRegex.test(email.value)) {
         signInUser(email.value, password.value);
         invalidEmail.value = false;
@@ -115,8 +117,12 @@ watch(() => userStore.loading, (newValue, oldValue) => {
             </div>
 
             <div class="cta_links flex-col">
-                <Buttons btn_class="lg_btn pry_purple" type="submit" v-if="!loadingCTA">Login</Buttons>
-                <Buttons btn_class="lg_btn pry_purple_loading" type="submit" v-else>
+                <div v-if="!loadingCTA" class="inner_cta_links flex-col">
+                    <Buttons btn_class="lg_btn pry_purple" type="submit" v-if="validEmailInput">Login</Buttons>
+                    <Buttons btn_class="lg_btn pry_purple_disabled" v-else>Login</Buttons>
+
+                </div>
+                <Buttons btn_class="lg_btn pry_purple_loading" v-else>
                     <template #icon>
                         <PhosphorIconSpinner :size="20" weight="bold" />
                     </template>
