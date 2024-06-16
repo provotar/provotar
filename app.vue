@@ -3,6 +3,15 @@ const supabase = useSupabaseClient();
 const route = useRouter();
 const userActive = ref(true);
 
+useSeoMeta({
+  title: "Voting made ease -Provotar",
+  ogTitle: "Voting made ease -Provotar",
+  description: "Securely invite voters, get voting insights and announce results with ease.",
+  ogDescription: "Securely invite voters, get voting insights and announce results with ease.",
+  ogImage: "/images/og/home.og",
+  twitterCard: "summary_large_image"
+})
+
 // sessionTimeOut function
 const setUserActive = () => {
   userActive.value = true;
