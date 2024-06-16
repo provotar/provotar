@@ -3,7 +3,7 @@
 const route = useRouter();
 
 useHead({
-    title: 'Voting made easy'
+    title: 'Provotar | Voting made easy'
 });
 
 const getStarted = () => {
