@@ -50,6 +50,7 @@ const savePollName = () => {
 onMounted(() => {
     usePolls.getPolls();
     useUser.getUserSession();
+
 })
 
 
@@ -60,7 +61,7 @@ onMounted(() => {
         <div class="topView flex-row">
             <p class="viewHeader">My Polls</p>
             <div v-if="userDetails">
-                <div v-if="userDetails.isPro || userPolls.length < 4">
+                <div v-if="userDetails.isPro || !userPolls.length">
                     <Buttons btn_class="sml_btn pry_purple" @btn_click="$openModal(pollNameModal)">Start a poll
                     </Buttons>
                 </div>
