@@ -8,7 +8,7 @@ useSeoMeta({
   ogTitle: "Voting made ease -Provotar",
   description: "Securely invite voters, get voting insights and announce results with ease.",
   ogDescription: "Securely invite voters, get voting insights and announce results with ease.",
-  ogImage: "/images/og/home.og",
+  ogImage: "/images/og/home.png",
   twitterCard: "summary_large_image"
 })
 
