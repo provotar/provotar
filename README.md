@@ -17,7 +17,7 @@ Provotar is built with Nuxt 3 and Supabase.
 
 ## Community and Contributing
 We welcome all contributions from the community! Developers, designers, and product managers are free to join the community and contribute.
-To connect with other contributors and share your ideas, join the community on  [Discord]()
+To connect with other contributors and share your ideas, join the community on  [Discord](https://discord.gg/vxWwSwX3aT)
 
 
 ## Figma Design
