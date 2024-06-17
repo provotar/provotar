@@ -3,45 +3,51 @@
 
 # Provotar
 
-Provotar is an open-source project that leverages Nuxt.js and Supabase to revolutionize the way election polls are conducted and analyzed using artificial intelligence (AI) technology. With Election AI, users can easily set up and manage election polls, send secure voting links to voters, and leverage AI algorithms for advanced analysis of election data.
+Provotar is an open-source e-voting platform. Our use cases are small to medium-scale electoral bodies and we are providing a seamless approach to handling polls from initiation to results.
+Provotar is built with Nuxt 3 and Supabase.
+
+
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase-dark.svg)](https://supabase.com)
 
 ## Features
 
 - **Easy Setup**: Quickly set up election polls with just a few clicks.
 - **Secure Voting**: Send secure voting links to voters via email to ensure the integrity of the voting process.
-- **AI-Powered Analysis**: Utilize advanced AI algorithms to analyze election data, identify trends, and make informed decisions.
+- **Stress-free balloting**: Compile results and announce winners with ease.
+
+## Community and Contributing
+We welcome all contributions from the community! Developers, designers, and product managers are free to join the community and contribute.
+To connect with other contributors and share your ideas, join the community on  [Discord]()
+
 
 ## Figma Design
 ![FigmaImage](https://provotar.com/images/screens/Home.png)
-View the Figma design file for Election AI: [Provotar Figma](https://www.figma.com/file/eHPle9xPJLlHrLEyEN1b54/Web?type=design&node-id=38%3A9880&mode=design&t=hInc5LSdTew48HWs-1)
+View the Figma design file: [Provotar Figma](https://www.figma.com/file/eHPle9xPJLlHrLEyEN1b54/Web?type=design&node-id=38%3A9880&mode=design&t=hInc5LSdTew48HWs-1)
 
 ## Getting Started
 
-To get started with provotar, follow these steps:
-
-1. **Clone the Repository**: Clone the provotar repository to your local machine.
+To get started with contributing to Provotar, follow these steps:
+1. **Create an issue or pick an existing issue**: Search through issues to be sure an issue does not already exist.
+   
+2. **Clone the Repository**: Clone the Provotar repository to your local machine.
 
    ```bash
-   git clone https://github.com/vectorChi/provotar.git
+   git clone https://github.com/provotar/provotar.git
    ```
-2. **Install Dependencies**: Navigate to the project directory and install the required dependencies.
+   
+3. **Install Dependencies**: Navigate to the project directory and install the required dependencies.
 
 ```bash
 cd provotar
 npm install
 ```
 
-3. **Set Up Environment Variables**: Create a .env file based on the provided .env.example file and configure the required environment variables.
+4. **Set Up Environment Variables**: Create a .env file based on the provided .env.example file and configure the required environment variables.
 
 ```bash
 npm run dev
 ```
-## Contributing
-We welcome contributions from the community! If you'd like to contribute to Provotar, please follow these guidelines:
 
-Fork the repository and create a new branch for your feature or bug fix.
-Make your changes and ensure that the code follows the project's coding standards.
-Write tests for any new functionality and ensure that existing tests pass.
-Submit a pull request with a clear description of your changes and why they are needed.
-License
-Election AI is licensed under the MIT License.
+
+## License
+Provotar is licensed under the MIT License.
