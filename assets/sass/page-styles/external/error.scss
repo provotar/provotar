@@ -1,0 +1,61 @@
+@use "../../utils/colours";
+
+.error-page {
+  margin: 0 auto;
+  align-items: center;
+  gap: 4rem;
+  width: 30%;
+
+  margin-top: 8rem;
+
+  .error-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: colours.$grey-60;
+  }
+  .error-title {
+    font-size: 2.25rem;
+    color: colours.$grey-90;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: -0.09rem;
+    text-align: center;
+  }
+
+  .error-img-content,
+  .error-img-statuscode,
+  .error-content {
+    align-items: center;
+  }
+  .error-img-content {
+    gap: 2rem;
+  }
+  .error-img-statuscode {
+    gap: 0.8rem;
+  }
+  .error-content {
+    gap: 1rem;
+  }
+
+  .error-img {
+    width: 12rem;
+  }
+}
+
+@media (min-width: 320px) {
+  .error-page {
+    width: 80%;
+    margin-top: 4rem;
+  }
+}
+@media (min-width: 768px) {
+  .error-page {
+    width: 40%;
+    margin-top: 8rem;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page {
+    width: 30%;
+  }
+}
