@@ -166,7 +166,10 @@ const saveInviteeToStore = () => {
 }
 const saveInviteeToDB = () => {
     usePolls.saveInviteesToDB();
+    // refresh invitee list
+    getPollDets();
     $closeModal(confirmSaveInvitees.value)
+
 }
 
 

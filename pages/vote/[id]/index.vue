@@ -54,7 +54,7 @@ const startVote = () => {
     if (inviteeDets.value) {
         // route to votes
         if (!inviteeDets.value.hasVoted) {
-            console.log(inviteeDets.value);
+            // console.log(inviteeDets.value);
             router.push(`/vote/${voteID.value}/voteslides/${inviteeDets.value.id}`)
         } else {
             // route to hasVoted

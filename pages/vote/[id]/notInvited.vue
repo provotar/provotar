@@ -2,6 +2,9 @@
 const route = useRoute();
 const router = useRouter();
 const voteID = ref(route.params.id);
+useHead({
+    title: 'Provotar | Vote'
+})
 </script>
 <template>
     <div class="intro-template vote-info flex-col">
