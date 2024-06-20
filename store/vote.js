@@ -6,11 +6,17 @@ export const useVoteStore = defineStore("vote", {
     voteSelection: [],
     inviteeId: "",
     voteTime: "",
+    voteSubmitting: false,
   }),
 
   actions: {
     async saveVotesToDB() {
+      this.voteSubmitting = true;
       const supabase = useSupabaseClient();
+      const voteFullTime = new Date();
+      this.voteTime = voteFullTime.toISOString();
+
+      // add votes
       try {
         const { data } = await supabase.from("votes").insert(
           this.voteSelection.map((votes) => ({
@@ -21,16 +27,8 @@ export const useVoteStore = defineStore("vote", {
             invitee_id: this.inviteeId,
           }))
         );
-      } catch (err) {
-        console.log(err);
-      }
-    },
 
-    async updateVotedStatus() {
-      const supabase = useSupabaseClient();
-      const voteFullTime = new Date();
-      this.voteTime = voteFullTime.toLocaleString();
-      try {
+        // update invitee
         const { error } = await supabase
           .from("invitees")
           .update({ hasVoted: true, timeVoted: this.voteTime })
@@ -38,6 +36,7 @@ export const useVoteStore = defineStore("vote", {
         if (error) {
           console.log(error);
         }
+        this.voteSubmitting = false;
       } catch (err) {
         console.log(err);
       }
