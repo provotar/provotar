@@ -38,8 +38,8 @@ const saveVotes = () => {
 const nextPosition = () => {
     currentSlideIndex.value += 1;
     currentPosition.value = positionList.value[currentSlideIndex.value]
-    console.log(selectedOptions.value)
-    console.log(selectedOptionsArray.value);
+    // console.log(selectedOptions.value)
+    // console.log(selectedOptionsArray.value);
 
 }
 const previousPosition = () => {

@@ -4,8 +4,8 @@ const route = useRouter();
 const userActive = ref(true);
 
 useSeoMeta({
-  title: "Voting made ease -Provotar",
-  ogTitle: "Voting made ease -Provotar",
+  title: "Voting made easy -Provotar",
+  ogTitle: "Voting made easy -Provotar",
   description: "Securely invite voters, get voting insights and announce results with ease.",
   ogDescription: "Securely invite voters, get voting insights and announce results with ease.",
   ogImage: "/images/og/home.png",

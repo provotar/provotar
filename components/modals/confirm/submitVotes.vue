@@ -1,6 +1,10 @@
 <script setup>
 defineEmits(['closeModal', 'confirmSubmitVotes'])
-
+defineProps({
+    loading: {
+        type: Boolean,
+    }
+})
 </script>
 
 <template>
@@ -18,7 +22,16 @@ defineEmits(['closeModal', 'confirmSubmitVotes'])
                     candidate(s) and this CANNOT be reverted. Do you want to proceed?</p>
                 <div class="modal_ctas flex-row">
                     <p class="back-button" @click="$emit('closeModal')">Cancel</p>
-                    <Buttons btn_class="sml_btn pry_purple" @click="$emit('confirmSubmitVotes')">Submit votes</Buttons>
+
+                    <Buttons v-if="loading" btn_class="sml_btn pry_purple_loading">
+                        <template #icon>
+                            <PhosphorIconSpinner :size="20" weight="bold" />
+                        </template>
+                        Submiting votes..
+                    </Buttons>
+
+                    <Buttons v-else btn_class="sml_btn pry_purple" @click="$emit('confirmSubmitVotes')">Submit votes
+                    </Buttons>
                 </div>
             </div>
         </template>
