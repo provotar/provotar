@@ -2,6 +2,13 @@
 defineProps({
     inviteeList: Array,
 })
+
+const convertTimestampz = (timestampz) => {
+    let dateObj = new Date(timestampz)
+    let dateStr = dateObj.toLocaleDateString();
+    let timeStr = dateObj.toLocaleTimeString();
+    return `${dateStr}, ${timeStr}`
+}
 </script>
 
 <template>
@@ -29,7 +36,7 @@ defineProps({
                         <p class="invitee-email">{{ invitee.email }}</p>
                     </td>
                     <td>
-                        <p class="date-invited">{{ invitee.created_at.slice(0, 10) }}</p>
+                        <p class="date-invited">{{ convertTimestampz(invitee.created_at) }}</p>
                     </td>
                     <td>
                         <div v-if="invitee.hasVoted" class="badge green flex-row">
@@ -41,7 +48,7 @@ defineProps({
                     </td>
 
                     <td>
-                        <p v-if="invitee.timeVoted">{{ invitee.timeVoted }}</p>
+                        <p v-if="invitee.timeVoted">{{ convertTimestampz(invitee.timeVoted) }}</p>
                         <p v-else>-</p>
                     </td>
                 </tr>

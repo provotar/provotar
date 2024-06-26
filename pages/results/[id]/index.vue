@@ -21,7 +21,10 @@ const getPollDets = async () => {
 
         if (data[0]) {
             pollDetails.value = data;
-            positions.value = data[0].positions
+            positions.value = data[0].positions.map((position) => ({
+                ...position,
+                isOpen: true
+            }))
             loadingPollDetails.value = false;
         }
 
@@ -73,6 +76,15 @@ const votePercentage = (user_id, position_id) => {
     }
 }
 
+// toggle vote analytics
+const togglePositionView = (id) => {
+    // find position dets
+    const positionSection = positions.value.find(position => position.id === id)
+    // toggle view
+    if (positionSection) {
+        positionSection.isOpen = !positionSection.isOpen
+    }
+}
 
 onMounted(() => {
     getPollDets();
@@ -133,15 +145,21 @@ onMounted(() => {
                     <div class="poll-data-main flex-col" v-for="position in positions" :key="position.id">
                         <div class="poll-data-header flex-row">
                             <p class="position-name">{{ position.position_name }}</p>
-                            <div class="see-polls-dropdown flex-row">
+                            <div @click="togglePositionView(position.id)" v-if="position.isOpen"
+                                class="see-polls-dropdown flex-row">
+                                <PhosphorIconCaretUp :size="24" />
+                                <p>Hide full polls</p>
+
+                            </div>
+                            <div @click="togglePositionView(position.id)" v-else class="see-polls-dropdown flex-row">
                                 <PhosphorIconCaretDown :size="24" />
                                 <p>See full polls</p>
 
                             </div>
                         </div>
 
-                        <div class="candidate-data flex-row" v-for="candidate in position.candidates"
-                            :key="candidate.id">
+                        <div class="candidate-data flex-row" v-if="position.isOpen"
+                            v-for="candidate in position.candidates" :key="candidate.id">
                             <p class="candidate-name">{{ candidate.candidate_name }}</p>
 
                             <div class="vote-percentage flex-row">
