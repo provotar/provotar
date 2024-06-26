@@ -1,6 +1,7 @@
 
 interface _GlobalComponents {
-      'Buttons': typeof import("../components/buttons.vue")['default']
+      'BadgesPlan': typeof import("../components/badges/plan.vue")['default']
+    'Buttons': typeof import("../components/buttons.vue")['default']
     'CarouselsPollSlides': typeof import("../components/carousels/pollSlides.vue")['default']
     'EmptystatesPollsNoInvitees': typeof import("../components/emptystates/polls/noInvitees.vue")['default']
     'FooterLinkfooter': typeof import("../components/footer/linkfooter.vue")['default']
@@ -1561,7 +1562,8 @@ interface _GlobalComponents {
     'Head': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Head']
     'Html': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
-      'LazyButtons': typeof import("../components/buttons.vue")['default']
+      'LazyBadgesPlan': typeof import("../components/badges/plan.vue")['default']
+    'LazyButtons': typeof import("../components/buttons.vue")['default']
     'LazyCarouselsPollSlides': typeof import("../components/carousels/pollSlides.vue")['default']
     'LazyEmptystatesPollsNoInvitees': typeof import("../components/emptystates/polls/noInvitees.vue")['default']
     'LazyFooterLinkfooter': typeof import("../components/footer/linkfooter.vue")['default']
@@ -3136,6 +3138,7 @@ declare module 'vue' {
   export interface GlobalComponents extends _GlobalComponents { }
 }
 
+export const BadgesPlan: typeof import("../components/badges/plan.vue")['default']
 export const Buttons: typeof import("../components/buttons.vue")['default']
 export const CarouselsPollSlides: typeof import("../components/carousels/pollSlides.vue")['default']
 export const EmptystatesPollsNoInvitees: typeof import("../components/emptystates/polls/noInvitees.vue")['default']
@@ -4697,6 +4700,7 @@ export const Style: typeof import("../node_modules/nuxt/dist/head/runtime/compon
 export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Head']
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
+export const LazyBadgesPlan: typeof import("../components/badges/plan.vue")['default']
 export const LazyButtons: typeof import("../components/buttons.vue")['default']
 export const LazyCarouselsPollSlides: typeof import("../components/carousels/pollSlides.vue")['default']
 export const LazyEmptystatesPollsNoInvitees: typeof import("../components/emptystates/polls/noInvitees.vue")['default']
