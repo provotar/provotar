@@ -53,7 +53,7 @@ const saveVotesToDB = () => {
 }
 
 const seePollStats = () => {
-    router.push(`/vote/${voteID.value}/result`)
+    router.push(`/results/${voteID.value}/`)
 }
 const goToIntro = () => {
     router.push(`/vote/${voteID.value}/`)
