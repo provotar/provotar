@@ -38,7 +38,7 @@ defineProps({
 
 
 
-                        <Buttons @click="$emit('closePollSuccess')" btn_class="sml_btn pry_purple"> All done
+                        <Buttons @click="$emit('closePollSuccess')" btn_class="sml_btn pry_purple"> See Poll
                         </Buttons>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ export const usePollStore = defineStore("polls", {
     pollDets: [],
     accountID: null,
     inviteList: [],
+    savingPoll: false,
     newPoll: {
       pollTitle: "",
       pollID: "",
@@ -71,6 +72,7 @@ export const usePollStore = defineStore("polls", {
 
     // create poll
     async createPoll() {
+      this.savingPoll = true;
       const supabase = useSupabaseClient();
       const user = useSupabaseUser();
       const route = useRouter();
@@ -101,9 +103,8 @@ export const usePollStore = defineStore("polls", {
               }));
             })
           );
-          if (candidateError) {
-            console.log(candidateError);
-          }
+
+          this.savingPoll = false;
         } catch (error) {
           console.log(error);
         }
