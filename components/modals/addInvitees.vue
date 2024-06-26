@@ -9,7 +9,6 @@ const emit = defineEmits(['closeModal', 'storeInvitees', 'deleteInvitee'])
 const newInviteEmail = ref();
 
 
-
 const addInviteeEmail = () => {
     props.savedInvitees.push({
         invitee_email: newInviteEmail.value,
@@ -28,7 +27,6 @@ const toggleEditMode = (id) => {
 const deleteInvitee = (id) => {
     emit('deleteInvitee', id)
 }
-
 
 
 

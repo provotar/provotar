@@ -1,5 +1,9 @@
 <script setup>
-defineEmits(['closeModal', 'submitPoll'])
+defineEmits(['closeModal', 'submitPoll']);
+defineProps({
+    loading: Boolean
+})
+
 
 </script>
 
@@ -19,7 +23,10 @@ defineEmits(['closeModal', 'submitPoll'])
                     details. Do you want to proceed?</p>
                 <div class="modal_ctas flex-row">
                     <p class="back-button" @click="$emit('closeModal')">Cancel</p>
-                    <Buttons btn_class="sml_btn pry_purple" @click="$emit('submitPoll')">Create Poll</Buttons>
+                    <Buttons v-if="loading" btn_class="sml_btn pry_purple_disabled">Creating poll...</Buttons>
+
+                    <Buttons v-else btn_class="sml_btn pry_purple" @click="$emit('submitPoll')">Create Poll</Buttons>
+
                 </div>
             </div>
         </template>

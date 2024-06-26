@@ -33,6 +33,20 @@ const deleteCandidate = (id) => {
 }
 
 
+//check if a candidate form is currently active and hide add candidate button
+const editActive = computed(() => {
+    //checks for invitee
+    if (props.positionDetails.candidates) {
+        //returns true if a candidate is being edited
+        return props.positionDetails.candidates.some(invitee => invitee.editMode);
+        // returns false if there are no candidates
+    } else {
+        return false;
+    }
+})
+
+
+
 
 
 </script>
@@ -115,7 +129,7 @@ const deleteCandidate = (id) => {
                             </div>
 
                         </div>
-                        <div @click="addCandidate()" class="create-candidate-btn flex-row">
+                        <div v-if="!editActive" @click="addCandidate()" class="create-candidate-btn flex-row">
                             <PhosphorIconPlus :size="24" />
                             <p>Add a candidate</p>
                         </div>
