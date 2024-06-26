@@ -8,7 +8,7 @@ defineEmits(['getStarted', 'tglHamMenu'])
             <img class="main-logo" src="/images/icons/logo.svg" alt="logo">
             <div class="top-navbar-right flex-row">
                 <ul class="link-section flex-row">
-                    <nuxt-link to="https://www.github.com/provotar/provotar"
+                    <nuxt-link to="https://www.github.com/provotar/provotar" target="_blank"
                         class="top-navbar-link">Contribute</nuxt-link>
                 </ul>
                 <ul class="cta-section flex-row">
