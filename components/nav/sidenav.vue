@@ -38,7 +38,16 @@ onMounted(() => {
                 <img src="/images/icons/user_avatar.svg" alt="user_avatar">
                 <div class="name_role flex-col" v-for="user in userDetails">
                     <p class="user_name">{{ user.full_name }}</p>
-                    <p class="user_role">Admin</p>
+                    <BadgesPlan v-if="user.isPro" badge_class="plan_badge pro">
+                        <template #badgeText>
+                            Pro
+                        </template>
+                    </BadgesPlan>
+                    <BadgesPlan v-else badge_class="plan_badge free-trial">
+                        <template #badgeText>
+                            Free Trial
+                        </template>
+                    </BadgesPlan>
                 </div>
             </div>
             <PhosphorIconCaretDown :size="20" />
