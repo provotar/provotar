@@ -1,0 +1,21 @@
+@use "../../utils/colours";
+.plan_badge {
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.8rem;
+  align-items: center;
+  width: max-content;
+
+  .badge-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: colours.$grey-90;
+    line-height: 145%;
+    margin: 0;
+  }
+}
+.free-trial {
+  background-color: colours.$grey-30;
+}
+.pro {
+  background: linear-gradient(185deg, #fef6e7 -6.57%, #f3a218 125.14%);
+}
