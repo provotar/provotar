@@ -11,6 +11,12 @@ definePageMeta({
 const usePolls = usePollStore();
 const positionList = ref([]);
 const positionToEdit = ref([]);
+const pollID = usePolls.newPoll.pollID;
+let submittingPoll = ref(false);
+
+watch(() => usePolls.savingPoll, (newValue, oldValue) => {
+    submittingPoll.value = newValue
+})
 
 
 // Modal state object
@@ -58,15 +64,19 @@ const savePositionDetails = () => {
 }
 
 // save details to database
-const addPositionsToDB = () => {
-    usePolls.createPoll();
+const addPositionsToDB = async () => {
+    await usePolls.createPoll();
     $closeModal(confirmPollCreationModal.value)
     $openModal(successPollCreatedModal.value)
 }
-// close success, go to home view
+// close success, go to poll view
 const closePollSuccess = () => {
     $closeModal(successPollCreatedModal.value);
-    route.push('/mypolls')
+    if (pollID) {
+        route.push(`/mypolls/${pollID}`)
+    } else {
+        route.push(`/mypolls`)
+    }
 }
 
 // copy-link\
@@ -168,8 +178,7 @@ const copyLink = async () => {
         @clear-position="clearPosition" @closeModal="$closeModal(editPositionModal)">
     </ModalsEditPosition>
     <ModalsConfirmPollCreation v-show="confirmPollCreationModal.isOpen"
-        @closeModal="$closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()">
-
+        @closeModal="$closeModal(confirmPollCreationModal)" @submitPoll="addPositionsToDB()" :loading="submittingPoll">
     </ModalsConfirmPollCreation>
     <ModalsSuccessPollCreated v-show="successPollCreatedModal.isOpen" @closePollSuccess="closePollSuccess"
         :linkCopied="linkCopied" @copyLink="copyLink()">

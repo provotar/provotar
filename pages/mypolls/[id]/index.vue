@@ -11,6 +11,7 @@ definePageMeta({
 const usePoll = usePollStore();
 const loadingPollDetails = ref(false);
 const route = useRoute();
+const router = useRouter()
 const pollId = ref(route.params.id);
 
 
@@ -114,6 +115,11 @@ const endPoll = () => {
     usePoll.endPoll(pollId.value);
 }
 
+// route to invitees
+const seeInvitees = () => {
+    router.push(`/mypolls/${pollId.value}/invitees`)
+}
+
 
 
 onMounted(() => {
@@ -151,7 +157,9 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="poll-ctas flex-row">
-                                    <Buttons btn_class="sml_btn sec_purple">Edit Poll</Buttons>
+                                    <Buttons btn_class="sml_btn sec_purple" @btn_click="seeInvitees()">Add invitees
+                                    </Buttons>
+
                                     <PhosphorIconDotsThree class="optionsIcon" :size="24" />
                                 </div>
                             </div>
