@@ -5,6 +5,8 @@ export const usePollStore = defineStore("polls", {
   state: () => ({
     userPolls: [],
     loadingPolls: true,
+    loadingEndPolls: false,
+    loadingStartPolls: false,
     noPolls: false,
     pollDets: [],
     accountID: null,
@@ -114,14 +116,35 @@ export const usePollStore = defineStore("polls", {
 
     // end poll
     async endPoll(pollid) {
+      this.loadingEndPolls = true;
       const supabase = useSupabaseClient();
       const route = useRouter();
       try {
         const { error } = await supabase
           .from("polls")
-          .update({ isLive: FALSE })
+          .update({ status: "isEnded" })
           .eq("id", pollid);
-        route.push("/mypolls");
+        this.loadingEndPolls = false;
+
+        if (error) {
+          throw error;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // end poll
+    async startPoll(pollid) {
+      this.loadingStartPolls = true;
+      const supabase = useSupabaseClient();
+      const route = useRouter();
+      try {
+        const { error } = await supabase
+          .from("polls")
+          .update({ status: "isLive" })
+          .eq("id", pollid);
+        this.loadingStartPolls = false;
+
         if (error) {
           throw error;
         }

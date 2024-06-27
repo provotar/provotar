@@ -2,7 +2,7 @@
 
 defineEmits(['endPoll', 'resumePoll'])
 defineProps({
-    isLive: Boolean,
+    status: String,
     pollId: String,
 });
 </script>
@@ -15,11 +15,11 @@ defineProps({
             <p class="menu-text">Edit Poll</p>
         </div>
 
-        <div v-if="isLive" class="menu-list endpoll flex-row" @click="$emit('endPoll')">
+        <div v-if="status === 'isLive'" class="menu-list endpoll flex-row" @click="$emit('endPoll')">
             <PhosphorIconFlag :size="20" />
             <p class="menu-text">End Poll</p>
         </div>
-        <div v-else class="menu-list resumepoll flex-row" @click="$emit('resumePoll')">
+        <div v-if="status === 'isEnded'" class="menu-list resumepoll flex-row" @click="$emit('resumePoll')">
             <PhosphorIconFlag :size="20" />
             <p class="menu-text">Resume Poll</p>
         </div>

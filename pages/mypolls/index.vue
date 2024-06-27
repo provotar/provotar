@@ -99,11 +99,15 @@ onMounted(() => {
                             <p class="pollCardVotes">{{ polls.votes.length }} votes</p>
                             <img v-if="polls.isLive" class="divider_dot" src="/images/icons/divider_dot.svg"
                                 alt="divider_dot">
-                            <div v-if="polls.isLive" class="live-check flex-row">
+                            <div v-if="polls.status === 'notStarted'" class="notstarted-check flex-row">
+                                <p class="notstarted-text">Not Started</p>
+                                <img class="live-dot" src="/images/icons/black_dot.svg" alt="black_dot">
+                            </div>
+                            <div v-if="polls.status === 'isLive'" class="live-check flex-row">
                                 <p class="live-text">Live</p>
                                 <img class="live-dot" src="/images/icons/green_dot.svg" alt="green_dot">
                             </div>
-                            <div v-else class="ended-check flex-row">
+                            <div v-if="polls.status === 'isEnded'" class="ended-check flex-row">
                                 <img src="/images/icons/icon_flag.svg" alt="icon_flag">
                                 <p class="ended-text">Ended</p>
                             </div>
