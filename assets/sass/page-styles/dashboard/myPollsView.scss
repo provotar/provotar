@@ -74,7 +74,7 @@
               font-size: 0.875rem;
             }
             .live-dot {
-              width: 0.8rem;
+              width: 0.6rem;
               margin-top: 0.15rem;
             }
           }
@@ -86,6 +86,19 @@
             }
             .ended-text {
               font-size: 0.875rem;
+            }
+          }
+
+          .notstarted-check {
+            gap: 0.3rem;
+            color: colours.$grey-70;
+            align-items: center;
+            .notstarted-text {
+              color: colours.$grey-70;
+              font-size: 0.875rem;
+            }
+            img {
+              width: 0.6rem;
             }
           }
         }
