@@ -22,10 +22,15 @@
   align-items: center;
 }
 
-.intro-wrapper,
-.poll-ended-wrapper {
+.intro-wrapper {
   gap: 2.88rem;
   width: 50%;
+  margin: 0 auto;
+}
+
+.poll-ended-wrapper {
+  gap: 2.88rem;
+  width: 90%;
   margin: 0 auto;
 }
 

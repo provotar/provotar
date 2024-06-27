@@ -1,5 +1,6 @@
 <script setup>
 import { usePollStore } from '~/store/polls';
+const { $openModal, $closeModal } = useNuxtApp();
 const supabase = useSupabaseClient();
 useHead({
     title: 'Provotar | My Polls'
@@ -17,6 +18,7 @@ const pollId = ref(route.params.id);
 
 const pollDetails = ref([]);
 const positions = ref([])
+const invitees = ref([])
 
 
 const getPollDets = async () => {
@@ -24,14 +26,15 @@ const getPollDets = async () => {
     try {
         const { data: polldata, error } = await supabase
             .from("polls")
-            .select("*, votes(*), positions(*, candidates(*))")
+            .select("*, votes(*), positions(*, candidates(*)), invitees(*)")
             .eq("id", `${pollId.value}`)
         if (polldata[0]) {
             pollDetails.value = polldata;
-            positions.value = polldata[0].positions.map((position) => ({
-                ...position,
-                isOpen: true
-            }))
+            invitees.value = polldata[0].invitees,
+                positions.value = polldata[0].positions.map((position) => ({
+                    ...position,
+                    isOpen: true
+                }))
 
             loadingPollDetails.value = false;
         }
@@ -119,13 +122,22 @@ const copyLink = async () => {
     }
 }
 
-// toggle endPollModal
+// toggle Modals
 const endPollModal = ref({ isOpen: false })
+const startPollModal = ref({ isOpen: false })
 
 
 // endPoll
-const endPoll = () => {
-    usePoll.endPoll(pollId.value);
+const endPoll = async () => {
+    await usePoll.endPoll(pollId.value);
+    $closeModal(endPollModal.value);
+    getPollDets();
+}
+// startPoll
+const startPoll = async () => {
+    await usePoll.startPoll(pollId.value);
+    $closeModal(startPollModal.value);
+    getPollDets();
 }
 
 // route to invitees
@@ -160,11 +172,15 @@ onMounted(() => {
                             <div class="poll-title-cta flex-row">
                                 <div class="name-livecheck flex-row">
                                     <p class="poll-title">{{ poll.poll_name }}</p>
-                                    <div v-if="poll.isLive" class="live-check flex-row">
+                                    <div v-if="poll.status === 'notStarted'" class="notstarted-check flex-row">
+                                        <p class="live-text">Not Started</p>
+                                        <img class="live-dot" src="/images/icons/black_dot.svg" alt="black_dot">
+                                    </div>
+                                    <div v-if="poll.status === 'isLive'" class="live-check flex-row">
                                         <p class="live-text">Live</p>
                                         <img class="live-dot" src="/images/icons/green_dot.svg" alt="green_dot">
                                     </div>
-                                    <div v-else class="ended-check flex-row">
+                                    <div v-if="poll.status === 'isEnded'" class="ended-check flex-row">
                                         <img src="/images/icons/icon_flag.svg" alt="icon_flag">
                                         <p>Ended</p>
                                     </div>
@@ -177,19 +193,28 @@ onMounted(() => {
                                 </div>
                             </div>
 
-                            <Buttons v-if="linkCopied" btn_class="sml_btn pry_grey copylink">
-                                Link copied
-                                <template #icon>
-                                    <PhosphorIconCopy :size="16" weight="bold" />
-                                </template>
-                            </Buttons>
-                            <Buttons v-else btn_class="sml_btn pry_grey copylink" @btn_click="copyLink()">
-                                Copy poll link
-                                <template #icon>
-                                    <PhosphorIconCopy :size="16" weight="bold" />
-                                </template>
-                            </Buttons>
-                            <OptionsMenuPollDetails :is-live="poll.isLive" v-if="isPollOptionsOpen"
+                            <div class="lower-poll-ctas flex-row">
+                                <Buttons v-if="poll.status === 'notStarted'" btn_class="sml_btn pry_purple start-poll"
+                                    @btn_click="$openModal(startPollModal)">
+                                    Start Poll
+                                </Buttons>
+
+                                <Buttons v-if="linkCopied" btn_class="sml_btn pry_grey copylink">
+                                    Link copied
+                                    <template #icon>
+                                        <PhosphorIconCopy :size="16" weight="bold" />
+                                    </template>
+                                </Buttons>
+                                <Buttons v-else btn_class="sml_btn pry_grey copylink" @btn_click="copyLink()">
+                                    Copy poll link
+                                    <template #icon>
+                                        <PhosphorIconCopy :size="16" weight="bold" />
+                                    </template>
+                                </Buttons>
+
+                            </div>
+
+                            <OptionsMenuPollDetails :status="poll.status" v-if="isPollOptionsOpen"
                                 @endPoll="$openModal(endPollModal)" :pollId="pollId" />
                         </div>
 
@@ -209,6 +234,13 @@ onMounted(() => {
                             <div class="poll-stat-dets flex-col">
                                 <p class="poll-stat-title">Total Candidates</p>
                                 <p class="poll-stat-value">{{ totalCandidates }}</p>
+                            </div>
+                        </div>
+                        <div class="poll-stat-card flex-row">
+                            <img src="/images/icons/total_invitees_icon.svg" alt="total_invitees_icon">
+                            <div class="poll-stat-dets flex-col">
+                                <p class="poll-stat-title">Total Invitees</p>
+                                <p class="poll-stat-value">{{ invitees.length }}</p>
                             </div>
                         </div>
 
@@ -257,8 +289,13 @@ onMounted(() => {
         </div>
         <LoadingstatesLoadPollDetails v-if="loadingPollDetails" />
         <ModalsConfirmEndPoll v-if="endPollModal.isOpen" @closeModal="$closeModal(endPollModal)"
-            @confirmEndPoll="endPoll()" />
+            @confirmEndPoll="endPoll()">
+        </ModalsConfirmEndPoll>
 
+
+        <ModalsConfirmStartPoll v-if="startPollModal.isOpen" @closeModal="$closeModal(startPollModal)"
+            @confirmStartPoll="startPoll()">
+        </ModalsConfirmStartPoll>
 
     </div>
 </template>

@@ -8,7 +8,7 @@
   }
 
   .top-section {
-    gap: 2rem;
+    gap: 3.3rem;
     .poll-header {
       gap: 1.1rem;
       position: relative;
@@ -17,7 +17,7 @@
         width: 6.25rem;
       }
       .poll-header-content {
-        gap: 1rem;
+        gap: 1.3rem;
         .poll-title-cta {
           justify-content: space-between;
           align-items: center;
@@ -46,6 +46,10 @@
               gap: 0.3rem;
               color: colours.$grey-70;
             }
+            .notstarted-check {
+              gap: 0.3rem;
+              align-items: center;
+            }
           }
 
           .poll-title {
@@ -61,6 +65,9 @@
         }
         .copylink {
           width: max-content;
+        }
+        .lower-poll-ctas {
+          gap: 0.8rem;
         }
       }
     }

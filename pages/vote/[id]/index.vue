@@ -80,7 +80,7 @@ onMounted(() => {
     <div class="intro-template flex-col">
         <div class="intro-template" v-if="voteDetails[0]">
             <div v-for="details in voteDetails" class="flex-col">
-                <div v-if="details.isLive" class="intro-wrapper flex-col">
+                <div v-if="details.status === 'isLive'" class="intro-wrapper flex-col">
                     <div class="intro-main flex-col">
                         <img class="vote-img" src="/images/icons/big_flag.svg" alt="big-flag">
                         <div class="vote-intro-content flex-col">
@@ -110,7 +110,7 @@ onMounted(() => {
 
                 </div>
 
-                <div v-else class="poll-ended-wrapper flex-col">
+                <div v-if="details.status === 'isEnded'" class="poll-ended-wrapper flex-col">
                     <div class="poll-ended-main flex-col">
                         <img src="/images/illustrations/red_pollbox_circle.svg" alt="red_pollbox_circle">
                         <div class="poll-ended-content flex-col">
@@ -124,6 +124,16 @@ onMounted(() => {
                     <NuxtLink :to="`/vote/${voteID}/result`">
                         <Buttons btn_class="lg_btn pry_purple">See result</Buttons>
                     </NuxtLink>
+                </div>
+
+                <div v-if="details.status === 'notStarted'" class="poll-ended-wrapper flex-col">
+                    <div class="poll-ended-main flex-col">
+                        <img src="/images/illustrations/grey_poll_box.svg" alt="red_pollbox_circle">
+                        <div class="poll-ended-content flex-col">
+                            <p class="poll-ended-title">This poll is yet to start</p>
+                            <p class="poll-ended-msg">You will be notified when this poll starts </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
